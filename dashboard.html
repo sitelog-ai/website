@@ -124,8 +124,9 @@
     <div class="seatline">
       <input id="seats" type="number" min="2" max="200">
       <button class="btn" id="seatSave">UPDATE SEATS</button>
+      <button class="btn" id="billingBtn" style="margin-left:auto;">MANAGE BILLING</button>
     </div>
-    <div class="hint">$19.99 per seat per month after your trial. Card, invoices, and receipts arrive here when billing goes live — you'll get an email before your trial ends.</div>
+    <div class="hint">$19.99 per seat per month. Seat changes prorate automatically. Card, invoices, and receipts live in Manage billing.</div>
   </div>
 </div>
 
@@ -153,6 +154,7 @@ function esc(s) { const d = document.createElement("div"); d.textContent = s ?? 
 
 function render() {
   const { company, members, projects } = roster;
+  $("billingBtn").textContent = company.stripe_subscription_id ? "MANAGE BILLING" : "START SUBSCRIPTION";
   $("coName").innerHTML = esc(company.name) +
     (company.status === "trialing" ? '<span class="trial">TRIAL — ENDS ' + new Date(company.trial_ends_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }).toUpperCase() + "</span>" : "");
   const used = members.length;
@@ -241,6 +243,12 @@ $("mInvite").onclick = async () => {
   const out = await call({ action: "invite", email: $("mEmail").value });
   if (out.error) return say(out.error, true);
   $("mEmail").value = ""; say("Invited — tell them to download SiteLog AI and sign in with that email."); refresh();
+};
+$("billingBtn").onclick = async () => {
+  const hasSub = roster && roster.company && roster.company.stripe_subscription_id;
+  const out = await call({ action: hasSub ? "portal" : "checkout" });
+  if (out.url) { window.location.href = out.url; return; }
+  say(out.error || "Billing is unavailable right now.", true);
 };
 $("seatSave").onclick = async () => {
   const out = await call({ action: "set_seats", seats: parseInt($("seats").value, 10) });

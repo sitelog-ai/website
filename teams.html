@@ -132,7 +132,7 @@
     <label>SEATS (INCLUDING YOU — MINIMUM 2, CHANGE ANYTIME)</label>
     <input id="seats" type="number" min="2" max="200" value="5">
     <button class="btn" id="startBtn">START FREE TRIAL</button>
-    <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember.</div>
+    <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember. Card required to start the trial; nothing is charged for 30 days, cancel anytime.</div>
   </div>
   <div id="step2" class="hidden">
     <h2>Check your email</h2>
@@ -204,6 +204,10 @@ $("verifyBtn").onclick = async () => {
   const created = await call({ action: "signup", company_name: company });
   if (created.error && !/already on a team/i.test(created.error)) { $("verifyBtn").disabled = false; return msg(created.error, true); }
   if (seats > 1) await call({ action: "set_seats", seats });
+
+  msg("Setting up your 30-day trial\u2026");
+  const checkout = await call({ action: "checkout" });
+  if (checkout.url) { window.location.href = checkout.url; return; }
   window.location.href = "dashboard.html";
 };
 </script>
