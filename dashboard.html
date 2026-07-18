@@ -104,9 +104,10 @@
       <input id="pName" placeholder="Job name">
       <input id="pAddr" placeholder="Address">
       <input id="pEmail" placeholder="Report email (optional)">
+      <select id="pAssign" title="Runs this job"></select>
       <button class="btn" id="pAdd">ADD JOB</button>
     </div>
-    <div class="hint">Reassigning a job moves nothing — every log stays with the job. Only the name on the door changes.</div>
+    <div class="hint">The job lands in that person's app automatically — nothing for them to set up. Reassigning later moves nothing; every log stays with the job.</div>
   </div>
 
   <div class="card">
@@ -163,10 +164,19 @@ function render() {
 
   const joined = members.filter((m) => m.user_id);
   $("projects").innerHTML = projects.map((p) => {
+    if (joined.length < 2) {
+      const holder = joined.find((m) => m.user_id === p.user_id);
+      return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + '</span></div>' +
+        '<span style="color:var(--text2);font-size:12.5px;">' + esc(holder ? holder.email : "unassigned") + "</span></div>";
+    }
     const opts = joined.map((m) => '<option value="' + m.id + '"' + (m.user_id === p.user_id ? " selected" : "") + ">" + esc(m.email) + "</option>").join("");
     return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + '</span></div>' +
       '<select data-project="' + p.id + '">' + opts + "</select></div>";
   }).join("") || '<div class="row"><div class="who"><span>No jobs yet — add the first one below.</span></div></div>';
+
+  const assign = $("pAssign");
+  assign.innerHTML = joined.map((m) => '<option value="' + m.id + '"' + (m.is_admin ? " selected" : "") + ">" + esc(m.is_admin ? "me" : m.email) + "</option>").join("");
+  assign.style.display = joined.length < 2 ? "none" : "";
 
   $("members").innerHTML = members.map((m) => {
     const status = m.user_id ? '<span class="pill joined">ON THE JOB</span>' : '<span class="pill invited">INVITED</span>';
@@ -234,7 +244,7 @@ $("gVerify").onclick = async () => {
   boot();
 };
 $("pAdd").onclick = async () => {
-  const out = await call({ action: "add_project", project_name: $("pName").value, address: $("pAddr").value, report_email: $("pEmail").value });
+  const out = await call({ action: "add_project", project_name: $("pName").value, address: $("pAddr").value, report_email: $("pEmail").value, member_id: $("pAssign").style.display === "none" ? null : $("pAssign").value });
   if (out.error) return say(out.error, true);
   $("pName").value = ""; $("pAddr").value = ""; $("pEmail").value = "";
   say("Job added."); refresh();
