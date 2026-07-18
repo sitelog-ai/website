@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiteLog AI Teams — one record for the whole company</title>
+<meta name="description" content="SiteLog AI team accounts for construction companies. $19.99 per person per month, 30-day free trial. Every jobsite's logs stay with the company — handovers take one tap.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000000'/><rect x='18' y='44' width='8' height='16' rx='4' fill='%23C8E829'/><rect x='32' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='46' y='20' width='8' height='60' rx='4' fill='%23C8E829'/><rect x='60' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='74' y='44' width='8' height='16' rx='4' fill='%23C8E829'/></svg>">
+<style>
+  :root{
+    --black:#000000; --card:#141414; --card2:#1A1A1A; --divider:#2C2C2C;
+    --yellow:#C8E829; --orange:#E87722; --urgent:#CC3B2A;
+    --text:#F5F5F5; --text2:#8A8A8A; --maxw:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--black);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--divider);}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .wordmark{font-weight:900;font-size:22px;letter-spacing:.5px;}
+  .wordmark .ai{color:var(--yellow);}
+  .nav-cta{background:var(--yellow);color:#111;font-weight:700;font-size:15px;padding:10px 20px;border-radius:999px;}
+  .hero{padding:64px 0 8px;text-align:center;}
+  .hero .kicker{display:inline-block;border:1.5px solid var(--orange);color:var(--orange);font-weight:800;font-size:12px;
+    letter-spacing:2px;padding:7px 16px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(34px,5.5vw,54px);font-weight:900;letter-spacing:-1px;line-height:1.08;}
+  h1 .y{color:var(--yellow);}
+  .sub{color:var(--text2);font-size:18px;max-width:620px;margin:18px auto 0;}
+  .price{font-size:22px;font-weight:800;margin-top:22px;}
+  .price small{color:var(--text2);font-weight:600;font-size:15px;}
+  .points{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;max-width:900px;margin:40px auto 0;text-align:left;}
+  .pt{background:var(--card);border:1px solid var(--divider);border-radius:14px;padding:18px;}
+  .pt b{display:block;font-size:15px;margin-bottom:6px;}
+  .pt span{color:var(--text2);font-size:14px;}
+  .signup{max-width:520px;margin:52px auto 80px;background:var(--card);border:1px solid var(--divider);border-radius:18px;padding:28px;}
+  .signup h2{font-size:20px;font-weight:900;margin-bottom:4px;}
+  .signup .note{color:var(--text2);font-size:13.5px;margin-bottom:20px;}
+  label{display:block;color:var(--text2);font-size:11px;font-weight:700;letter-spacing:1px;margin:14px 0 6px;}
+  input{width:100%;background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;color:var(--text);
+    font-size:16px;padding:13px 14px;outline:none;}
+  input:focus{border-color:var(--yellow);}
+  .btn{width:100%;background:var(--yellow);color:#111;font-weight:800;font-size:16px;letter-spacing:.5px;
+    border:none;border-radius:12px;padding:15px;margin-top:22px;cursor:pointer;}
+  .btn:disabled{opacity:.55;cursor:default;}
+  .btn:hover:not(:disabled){filter:brightness(1.08);}
+  .msg{margin-top:14px;font-size:14px;color:var(--text2);text-align:center;min-height:20px;}
+  .msg.err{color:var(--urgent);}
+  .fineprint{color:var(--text2);font-size:12.5px;text-align:center;margin-top:16px;}
+  footer{border-top:1px solid var(--divider);padding:28px 0 40px;color:var(--text2);font-size:13px;text-align:center;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <a class="wordmark" href="index.html">SITELOG <span class="ai">AI</span></a>
+  <a class="nav-cta" href="dashboard.html">Team dashboard</a>
+</div></nav>
+
+<section class="hero"><div class="wrap">
+  <div class="kicker">SITELOG AI TEAMS</div>
+  <h1>One record for the<br>whole <span class="y">company.</span></h1>
+  <p class="sub">Supers move on. Crews rotate. On a team account, every jobsite's logs stay with the company — and handing a job to a new super takes one tap.</p>
+  <div class="price">$19.99 <small>per person / month · 30-day free trial · cancel anytime</small></div>
+
+  <div class="points">
+    <div class="pt"><b>Everyone gets the full app</b><span>Capture, search, reports — the same fast tool in every field hand's pocket, admin included.</span></div>
+    <div class="pt"><b>Logs stay with the job</b><span>Reassign a superintendent and the project's whole history stays put. The record belongs to the job, not the phone.</span></div>
+    <div class="pt"><b>Zero-IT rollout</b><span>Type your crew's emails. They download the free app and sign in — that's the entire setup.</span></div>
+  </div>
+</div></section>
+
+<div class="signup" id="signup">
+  <div id="step1">
+    <h2>Start your team</h2>
+    <div class="note">Three fields. No sales call.</div>
+    <label>COMPANY NAME</label>
+    <input id="company" placeholder="Armanini Builders" autocomplete="organization">
+    <label>YOUR WORK EMAIL</label>
+    <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
+    <label>SEATS (INCLUDING YOU — CHANGE ANYTIME)</label>
+    <input id="seats" type="number" min="1" max="200" value="5">
+    <button class="btn" id="startBtn">START FREE TRIAL</button>
+    <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember.</div>
+  </div>
+  <div id="step2" class="hidden">
+    <h2>Check your email</h2>
+    <div class="note">Enter the 6-digit code we sent to <span id="sentTo"></span>.</div>
+    <label>CODE</label>
+    <input id="code" inputmode="numeric" maxlength="6" placeholder="000000">
+    <button class="btn" id="verifyBtn">CREATE TEAM</button>
+  </div>
+  <div class="msg" id="msg"></div>
+</div>
+
+<footer>© 2026 Block Management Services LLC · <a href="privacy.html" style="text-decoration:underline;">Privacy</a> · support@sitelog-ai.com</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SB_URL = "https://smogomdqivzomyggxlur.supabase.co";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtb2dvbWRxaXZ6b215Z2d4bHVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTA0NjQsImV4cCI6MjA4OTE2NjQ2NH0.Fy0d3fNTYn5ziSKXie6-dApmHN3DUwx5KsunYWXgaao";
+const sb = supabase.createClient(SB_URL, SB_KEY);
+const $ = (id) => document.getElementById(id);
+const msg = (t, err) => { const m = $("msg"); m.textContent = t; m.className = "msg" + (err ? " err" : ""); };
+
+$("startBtn").onclick = async () => {
+  const company = $("company").value.trim();
+  const email = $("email").value.trim().toLowerCase();
+  const seats = parseInt($("seats").value, 10);
+  if (company.length < 2) return msg("Enter your company name.", true);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("Enter a valid email.", true);
+  if (!(seats >= 1 && seats <= 200)) return msg("Seats must be between 1 and 200.", true);
+  $("startBtn").disabled = true; msg("Sending your code…");
+  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+  $("startBtn").disabled = false;
+  if (error) return msg(error.message, true);
+  $("sentTo").textContent = email;
+  $("step1").classList.add("hidden"); $("step2").classList.remove("hidden");
+  msg("");
+};
+
+$("verifyBtn").onclick = async () => {
+  const email = $("email").value.trim().toLowerCase();
+  const token = $("code").value.trim();
+  if (token.length !== 6) return msg("Enter the 6-digit code.", true);
+  $("verifyBtn").disabled = true; msg("Verifying…");
+  const { data, error } = await sb.auth.verifyOtp({ email, token, type: "email" });
+  if (error || !data.session) { $("verifyBtn").disabled = false; return msg(error?.message || "That code didn't work.", true); }
+
+  const company = $("company").value.trim();
+  const seats = parseInt($("seats").value, 10);
+  const uid = data.session.user.id;
+  await sb.from("users").upsert({ id: uid, email, name: email.split("@")[0], company_name: company }, { onConflict: "id" });
+
+  msg("Creating your team…");
+  const call = (body) => fetch(SB_URL + "/functions/v1/team", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: SB_KEY, Authorization: "Bearer " + data.session.access_token },
+    body: JSON.stringify(body),
+  }).then((r) => r.json());
+
+  const created = await call({ action: "signup", company_name: company });
+  if (created.error && !/already on a team/i.test(created.error)) { $("verifyBtn").disabled = false; return msg(created.error, true); }
+  if (seats > 1) await call({ action: "set_seats", seats });
+  window.location.href = "dashboard.html";
+};
+</script>
+</body>
+</html>
