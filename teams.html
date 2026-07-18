@@ -357,18 +357,20 @@ $("createBtn").onclick = async () => {
   await call({ action: "set_seats", seats });
 
   const problems = [];
+  const memberIds = {};
   for (const m of crew) {
     if (!m.admin) {
       msg("Inviting " + m.email + "…");
       const out = await call({ action: "invite", email: m.email.trim().toLowerCase() });
       if (out.error && !/already on the team/i.test(out.error)) problems.push(m.email + ": " + out.error);
+      if (out.member) memberIds[m.email.trim().toLowerCase()] = out.member.id;
     }
   }
   for (const m of crew) {
     for (const j of m.jobs) {
       if (!j.n.trim() || !j.a.trim()) continue;
       msg("Adding job " + j.n.trim() + "…");
-      const out = await call({ action: "add_project", project_name: j.n.trim(), address: j.a.trim(), report_email: m.email.trim().toLowerCase() });
+      const out = await call({ action: "add_project", project_name: j.n.trim(), address: j.a.trim(), report_email: m.email.trim().toLowerCase(), member_id: m.admin ? null : (memberIds[m.email.trim().toLowerCase()] || null) });
       if (out.error) problems.push(j.n.trim() + ": " + out.error);
     }
   }
