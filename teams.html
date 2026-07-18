@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SiteLog AI for Teams — The record belongs to the job, not the phone.</title>
-<meta name="description" content="Per-seat SiteLog AI team accounts for construction businesses. Every jobsite's logs stay with the company and handoffs take one tap. $19.99 per person per month — start your team in one minute, 30 days free.">
+<meta name="description" content="Per-seat SiteLog AI team accounts for construction businesses. Every jobsite's logs stay with the company and handoffs take one tap. $19.99 per person per month — build your crew in one minute, 30 days free.">
 <link rel="canonical" href="https://sitelog-ai.com/teams.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sitelog-ai.com/teams.html">
 <meta property="og:title" content="SiteLog AI for Teams">
-<meta property="og:description" content="The record belongs to the job — not the phone. Start your team in one minute — 30 days free.">
+<meta property="og:description" content="The record belongs to the job — not the phone. Build your crew in one minute — 30 days free.">
 <meta property="og:image" content="https://sitelog-ai.com/screenshots/s10.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000000'/><rect x='18' y='44' width='8' height='16' rx='4' fill='%23C8E829'/><rect x='32' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='46' y='20' width='8' height='60' rx='4' fill='%23C8E829'/><rect x='60' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='74' y='44' width='8' height='16' rx='4' fill='%23C8E829'/></svg>">
 <style>
@@ -54,14 +54,15 @@
   .card p{color:var(--text2);font-size:15.5px;}
   .card p strong{color:var(--text);}
 
-  /* signup */
-  .signup{max-width:540px;margin:8px auto 40px;background:var(--card);border:1.5px solid var(--yellow);border-radius:24px;padding:36px 32px;box-shadow:0 0 80px rgba(200,232,41,.08);}
+  /* signup / crew builder */
+  .signup{max-width:640px;margin:8px auto 40px;background:var(--card);border:1.5px solid var(--yellow);border-radius:24px;padding:36px 32px;box-shadow:0 0 80px rgba(200,232,41,.08);}
   .signup h2{font-size:22px;font-weight:900;margin-bottom:4px;}
   .signup .note{color:var(--text2);font-size:13.5px;margin-bottom:20px;}
   label{display:block;color:var(--text2);font-size:11px;font-weight:700;letter-spacing:1px;margin:14px 0 6px;}
   input{width:100%;background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;color:var(--text);
     font-size:16px;padding:13px 14px;outline:none;}
   input:focus{border-color:var(--yellow);}
+  input:disabled{opacity:.6;}
   .btn{width:100%;background:var(--yellow);color:#111;font-weight:800;font-size:16px;letter-spacing:.5px;
     border:none;border-radius:12px;padding:15px;margin-top:22px;cursor:pointer;}
   .btn:disabled{opacity:.55;cursor:default;}
@@ -72,6 +73,27 @@
   .fineprint a{color:var(--yellow);}
   .hidden{display:none;}
 
+  .member{background:var(--card2);border:1px solid var(--divider);border-radius:16px;padding:16px 16px 14px;margin-top:14px;}
+  .member-head{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .member-head span{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--orange);}
+  .two{display:grid;grid-template-columns:1fr 1.3fr;gap:10px;margin-top:10px;}
+  .jobrow{display:grid;grid-template-columns:1fr 1.5fr 40px;gap:10px;margin-top:10px;align-items:start;}
+  .addr{position:relative;}
+  .drop{position:absolute;left:0;right:0;top:50px;z-index:9;}
+  .drop div{background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;padding:10px 12px;font-size:13.5px;margin-top:3px;cursor:pointer;color:var(--text);}
+  .drop div:hover{border-color:var(--yellow);}
+  .drop div small{color:var(--text2);display:block;font-size:11.5px;}
+  .ghostbtn{background:none;border:1.5px solid var(--divider);color:var(--text2);border-radius:10px;
+    font-size:13px;font-weight:700;padding:9px 14px;cursor:pointer;margin-top:10px;}
+  .ghostbtn:hover{border-color:var(--yellow);color:var(--yellow);}
+  .ghostbtn.small{padding:0;width:40px;height:44px;margin-top:0;font-size:16px;}
+  .ghostbtn.small:hover{border-color:var(--urgent);color:var(--urgent);}
+  .ghostbtn.wide{width:100%;margin-top:14px;border-color:var(--orange);color:var(--orange);padding:12px;}
+  .ghostbtn.wide:hover{border-color:var(--yellow);color:var(--yellow);}
+  .tallybar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--divider);margin-top:18px;padding-top:14px;}
+  .tallybar .t1{font-size:13.5px;color:var(--text2);}
+  .tallybar .t2{font-size:15px;font-weight:800;color:var(--yellow);}
+
   footer{border-top:1px solid var(--divider);padding:36px 0;margin-top:24px;}
   .foot-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--text2);font-size:14px;}
   .foot-links{display:flex;gap:24px;}
@@ -81,7 +103,11 @@
     .hero{padding:52px 0 32px;}
     section{padding:32px 0;}
     .card{padding:24px 20px;}
-    .signup{padding:28px 22px;}
+    .signup{padding:26px 18px;}
+    .two,.jobrow{grid-template-columns:1fr;}
+    .jobrow{grid-template-columns:1fr;}
+    .ghostbtn.small{width:100%;height:38px;}
+    .drop{top:50px;}
   }
 </style>
 </head>
@@ -124,23 +150,38 @@
 <div class="signup" id="signup">
   <div id="step1">
     <h2>Start your team</h2>
-    <div class="note">Three fields. No sales call.</div>
+    <div class="note">You first — your crew and jobs come next. No sales call.</div>
     <label>COMPANY NAME</label>
     <input id="company" placeholder="Armanini Builders" autocomplete="organization">
+    <label>YOUR NAME</label>
+    <input id="adminName" placeholder="Lou Armanini" autocomplete="name">
     <label>YOUR WORK EMAIL</label>
     <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
-    <label>SEATS (INCLUDING YOU — MINIMUM 2, CHANGE ANYTIME)</label>
-    <input id="seats" type="number" min="2" max="200" value="5">
-    <button class="btn" id="startBtn">START FREE TRIAL</button>
-    <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember. Card required to start the trial; nothing is charged for 30 days, cancel anytime.</div>
+    <button class="btn" id="startBtn">CONTINUE</button>
+    <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember.</div>
   </div>
+
   <div id="step2" class="hidden">
     <h2>Check your email</h2>
     <div class="note">Enter the 6-digit code we sent to <span id="sentTo"></span>.</div>
     <label>CODE</label>
     <input id="code" inputmode="numeric" maxlength="6" placeholder="000000">
-    <button class="btn" id="verifyBtn">CREATE TEAM</button>
+    <button class="btn" id="verifyBtn">VERIFY</button>
   </div>
+
+  <div id="step3" class="hidden">
+    <h2>Build your crew</h2>
+    <div class="note">Add each person once, and their jobs under them. Everything can change later from your dashboard.</div>
+    <div id="members"></div>
+    <button class="ghostbtn wide" id="addMember">+ Add next team member</button>
+    <div class="tallybar">
+      <span class="t1" id="tally">1 person · 0 jobs</span>
+      <span class="t2" id="ptotal">$39.98/mo after trial</span>
+    </div>
+    <button class="btn" id="createBtn">CREATE TEAM — 30 DAYS FREE</button>
+    <div class="fineprint">Each job's reports go to the super you put on it. Job assignment locks in the first time each super signs in to the app.</div>
+  </div>
+
   <div class="msg" id="msg"></div>
   <div class="fineprint">Questions first? <a href="mailto:support@sitelog-ai.com?subject=SiteLog%20AI%20team%20account">support@sitelog-ai.com</a> · Individuals: <a href="/">start free at sitelog-ai.com</a></div>
 </div>
@@ -164,14 +205,103 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const sb = supabase.createClient(SB_URL, SB_KEY);
 const $ = (id) => document.getElementById(id);
 const msg = (t, err) => { const m = $("msg"); m.textContent = t; m.className = "msg" + (err ? " err" : ""); };
+const esc = (s) => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
+
+let crew = [];
+
+function tally() {
+  const jobs = crew.reduce((s, m) => s + m.jobs.length, 0);
+  const seats = Math.max(2, crew.length);
+  $("tally").textContent = crew.length + (crew.length === 1 ? " person" : " people") + " · " + jobs + (jobs === 1 ? " job" : " jobs") + (crew.length === 1 ? " · teams start at 2 seats" : "");
+  $("ptotal").textContent = "$" + (seats * 19.99).toFixed(2) + "/mo after trial";
+}
+
+function render() {
+  const wrap = $("members");
+  wrap.innerHTML = "";
+  crew.forEach((m, mi) => {
+    const card = document.createElement("div");
+    card.className = "member";
+    let jobs = "";
+    m.jobs.forEach((j, ji) => {
+      jobs += '<div class="jobrow">'
+        + '<input placeholder="Job name" value="' + esc(j.n) + '" data-m="' + mi + '" data-j="' + ji + '" data-f="n">'
+        + '<span class="addr"><input placeholder="Job address — start typing" value="' + esc(j.a) + '" data-m="' + mi + '" data-j="' + ji + '" data-f="a" autocomplete="off"><span class="drop"></span></span>'
+        + '<button class="ghostbtn small" data-deljob="' + mi + ':' + ji + '" aria-label="Remove job">✕</button>'
+        + '</div>';
+    });
+    card.innerHTML =
+      '<div class="member-head"><span>' + (m.admin ? "YOU · ADMIN" : "TEAM MEMBER " + (mi + 1)) + '</span>'
+      + (m.admin ? "" : '<button class="ghostbtn" style="margin-top:0;padding:5px 12px;font-size:12px;" data-delmem="' + mi + '">Remove</button>')
+      + '</div>'
+      + '<div class="two">'
+      + '<input placeholder="Name" value="' + esc(m.name) + '" data-m="' + mi + '" data-f="name"' + (m.admin ? " disabled" : "") + '>'
+      + '<input placeholder="super@company.com" value="' + esc(m.email) + '" data-m="' + mi + '" data-f="email"' + (m.admin ? " disabled" : "") + '>'
+      + '</div>'
+      + jobs
+      + '<button class="ghostbtn" data-addjob="' + mi + '">+ Add another job for this person</button>';
+    wrap.appendChild(card);
+  });
+  tally();
+
+  wrap.querySelectorAll("[data-addjob]").forEach(b => b.onclick = () => { crew[+b.dataset.addjob].jobs.push({ n: "", a: "" }); render(); });
+  wrap.querySelectorAll("[data-delmem]").forEach(b => b.onclick = () => { crew.splice(+b.dataset.delmem, 1); render(); });
+  wrap.querySelectorAll("[data-deljob]").forEach(b => b.onclick = () => { const p = b.dataset.deljob.split(":"); crew[+p[0]].jobs.splice(+p[1], 1); render(); });
+
+  wrap.querySelectorAll("input[data-f]").forEach(inp => {
+    inp.oninput = () => {
+      const m = crew[+inp.dataset.m];
+      if (inp.dataset.f === "n" || inp.dataset.f === "a") m.jobs[+inp.dataset.j][inp.dataset.f] = inp.value;
+      else m[inp.dataset.f] = inp.value;
+      if (inp.dataset.f === "a") suggest(inp);
+      tally();
+    };
+  });
+}
+
+let suggestTimer = null;
+function suggest(inp) {
+  const drop = inp.parentElement.querySelector(".drop");
+  const q = inp.value.trim();
+  clearTimeout(suggestTimer);
+  if (q.length < 4) { drop.innerHTML = ""; return; }
+  suggestTimer = setTimeout(async () => {
+    try {
+      const res = await fetch("https://photon.komoot.io/api/?q=" + encodeURIComponent(q) + "&limit=6&lang=en");
+      const data = await res.json();
+      const seen = new Set();
+      const hits = (data.features || [])
+        .filter(f => f.properties.countrycode === "US")
+        .sort((x, y) => (y.properties.housenumber ? 1 : 0) - (x.properties.housenumber ? 1 : 0))
+        .map(f => {
+          const p = f.properties;
+          const line1 = p.housenumber && p.street ? p.housenumber + " " + p.street : (p.name || p.street || "");
+          const line2 = [p.city, p.state, p.postcode].filter(Boolean).join(", ");
+          return { line1, line2, full: [line1, line2].filter(Boolean).join(", ") };
+        })
+        .filter(h => h.line1 && !seen.has(h.full) && seen.add(h.full))
+        .slice(0, 3);
+      drop.innerHTML = hits.map(h => '<div data-pick="' + esc(h.full) + '">' + esc(h.line1) + '<small>' + esc(h.line2) + '</small></div>').join("");
+      drop.querySelectorAll("[data-pick]").forEach(d => d.onclick = () => {
+        inp.value = d.dataset.pick;
+        crew[+inp.dataset.m].jobs[+inp.dataset.j].a = d.dataset.pick;
+        drop.innerHTML = "";
+      });
+    } catch (_) { drop.innerHTML = ""; }
+  }, 300);
+}
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".addr")) document.querySelectorAll(".drop").forEach(d => d.innerHTML = "");
+});
 
 $("startBtn").onclick = async () => {
   const company = $("company").value.trim();
+  const name = $("adminName").value.trim();
   const email = $("email").value.trim().toLowerCase();
-  const seats = parseInt($("seats").value, 10);
   if (company.length < 2) return msg("Enter your company name.", true);
+  if (name.length < 2) return msg("Enter your name.", true);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("Enter a valid email.", true);
-  if (!(seats >= 2 && seats <= 200)) return msg("Teams start at two seats.", true);
   $("startBtn").disabled = true; msg("Sending your code…");
   const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
   $("startBtn").disabled = false;
@@ -188,26 +318,65 @@ $("verifyBtn").onclick = async () => {
   $("verifyBtn").disabled = true; msg("Verifying…");
   const { data, error } = await sb.auth.verifyOtp({ email, token, type: "email" });
   if (error || !data.session) { $("verifyBtn").disabled = false; return msg(error?.message || "That code didn't work.", true); }
+  await sb.from("users").upsert({ id: data.session.user.id, email, name: $("adminName").value.trim() || email.split("@")[0], company_name: $("company").value.trim() }, { onConflict: "id" });
+  crew = [{ name: $("adminName").value.trim(), email, admin: true, jobs: [{ n: "", a: "" }] }];
+  $("step2").classList.add("hidden"); $("step3").classList.remove("hidden");
+  render(); msg("");
+};
 
-  const company = $("company").value.trim();
-  const seats = Math.max(2, parseInt($("seats").value, 10));
-  const uid = data.session.user.id;
-  await sb.from("users").upsert({ id: uid, email, name: email.split("@")[0], company_name: company }, { onConflict: "id" });
+$("addMember").onclick = () => { crew.push({ name: "", email: "", admin: false, jobs: [{ n: "", a: "" }] }); render(); };
 
-  msg("Creating your team…");
-  const call = (body) => fetch(SB_URL + "/functions/v1/team", {
+async function call(body) {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) return { error: "Signed out — reload and try again" };
+  return fetch(SB_URL + "/functions/v1/team", {
     method: "POST",
-    headers: { "Content-Type": "application/json", apikey: SB_KEY, Authorization: "Bearer " + data.session.access_token },
+    headers: { "Content-Type": "application/json", apikey: SB_KEY, Authorization: "Bearer " + session.access_token },
     body: JSON.stringify(body),
-  }).then((r) => r.json());
+  }).then(r => r.json()).catch(() => ({ error: "Network error" }));
+}
 
-  const created = await call({ action: "signup", company_name: company });
-  if (created.error && !/already on a team/i.test(created.error)) { $("verifyBtn").disabled = false; return msg(created.error, true); }
-  if (seats > 1) await call({ action: "set_seats", seats });
+$("createBtn").onclick = async () => {
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  for (const m of crew) {
+    if (!m.admin && !emailRe.test(m.email.trim().toLowerCase())) return msg("Every team member needs a valid email.", true);
+    for (const j of m.jobs) {
+      const hasAny = j.n.trim() || j.a.trim();
+      if (hasAny && (j.n.trim().length < 2 || j.a.trim().length < 2)) return msg("Each job needs a name and an address (or remove the empty row).", true);
+    }
+  }
+  const emails = crew.map(m => m.email.trim().toLowerCase()).filter(Boolean);
+  if (new Set(emails).size !== emails.length) return msg("Two team members have the same email.", true);
 
-  msg("Setting up your 30-day trial\u2026");
-  const checkout = await call({ action: "checkout" });
-  if (checkout.url) { window.location.href = checkout.url; return; }
+  $("createBtn").disabled = true;
+  msg("Creating your team…");
+  const created = await call({ action: "signup", company_name: $("company").value.trim() });
+  if (created.error && !/already on a team/i.test(created.error)) { $("createBtn").disabled = false; return msg(created.error, true); }
+
+  const seats = Math.max(2, crew.length);
+  await call({ action: "set_seats", seats });
+
+  const problems = [];
+  for (const m of crew) {
+    if (!m.admin) {
+      msg("Inviting " + m.email + "…");
+      const out = await call({ action: "invite", email: m.email.trim().toLowerCase() });
+      if (out.error && !/already on the team/i.test(out.error)) problems.push(m.email + ": " + out.error);
+    }
+  }
+  for (const m of crew) {
+    for (const j of m.jobs) {
+      if (!j.n.trim() || !j.a.trim()) continue;
+      msg("Adding job " + j.n.trim() + "…");
+      const out = await call({ action: "add_project", project_name: j.n.trim(), address: j.a.trim(), report_email: m.email.trim().toLowerCase() });
+      if (out.error) problems.push(j.n.trim() + ": " + out.error);
+    }
+  }
+  if (problems.length) {
+    $("createBtn").disabled = false;
+    return msg("Team created, but some items need attention on your dashboard: " + problems.join(" · "), true);
+  }
+  msg("Team created — opening your dashboard…");
   window.location.href = "dashboard.html";
 };
 </script>
