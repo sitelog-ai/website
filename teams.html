@@ -80,8 +80,8 @@
     <input id="company" placeholder="Armanini Builders" autocomplete="organization">
     <label>YOUR WORK EMAIL</label>
     <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
-    <label>SEATS (INCLUDING YOU — CHANGE ANYTIME)</label>
-    <input id="seats" type="number" min="1" max="200" value="5">
+    <label>SEATS (INCLUDING YOU — MINIMUM 2, CHANGE ANYTIME)</label>
+    <input id="seats" type="number" min="2" max="200" value="5">
     <button class="btn" id="startBtn">START FREE TRIAL</button>
     <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember.</div>
   </div>
@@ -111,7 +111,7 @@ $("startBtn").onclick = async () => {
   const seats = parseInt($("seats").value, 10);
   if (company.length < 2) return msg("Enter your company name.", true);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("Enter a valid email.", true);
-  if (!(seats >= 1 && seats <= 200)) return msg("Seats must be between 1 and 200.", true);
+  if (!(seats >= 2 && seats <= 200)) return msg("Teams start at two seats.", true);
   $("startBtn").disabled = true; msg("Sending your code…");
   const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
   $("startBtn").disabled = false;
@@ -130,7 +130,7 @@ $("verifyBtn").onclick = async () => {
   if (error || !data.session) { $("verifyBtn").disabled = false; return msg(error?.message || "That code didn't work.", true); }
 
   const company = $("company").value.trim();
-  const seats = parseInt($("seats").value, 10);
+  const seats = Math.max(2, parseInt($("seats").value, 10));
   const uid = data.session.user.id;
   await sb.from("users").upsert({ id: uid, email, name: email.split("@")[0], company_name: company }, { onConflict: "id" });
 
