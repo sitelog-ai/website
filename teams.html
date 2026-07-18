@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SiteLog AI for Teams — The record belongs to the job, not the phone.</title>
-<meta name="description" content="Per-seat SiteLog AI team accounts for construction businesses. Every jobsite's logs stay with the company, superintendent handoffs take one tap, and the whole crew logs the same way. 30 days free.">
+<meta name="description" content="Per-seat SiteLog AI team accounts for construction businesses. Every jobsite's logs stay with the company and handoffs take one tap. $19.99 per person per month — start your team in one minute, 30 days free.">
 <link rel="canonical" href="https://sitelog-ai.com/teams.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sitelog-ai.com/teams.html">
 <meta property="og:title" content="SiteLog AI for Teams">
-<meta property="og:description" content="The record belongs to the job — not the phone. Team accounts for construction businesses. 30 days free.">
+<meta property="og:description" content="The record belongs to the job — not the phone. Start your team in one minute — 30 days free.">
 <meta property="og:image" content="https://sitelog-ai.com/screenshots/s10.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000000'/><rect x='18' y='44' width='8' height='16' rx='4' fill='%23C8E829'/><rect x='32' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='46' y='20' width='8' height='60' rx='4' fill='%23C8E829'/><rect x='60' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='74' y='44' width='8' height='16' rx='4' fill='%23C8E829'/></svg>">
 <style>
   :root{
     --black:#000000;--card:#141414;--card2:#1A1A1A;--divider:#2C2C2C;
-    --yellow:#C8E829;--orange:#E87722;--text:#F5F5F5;--text2:#8A8A8A;--maxw:1120px;
+    --yellow:#C8E829;--orange:#E87722;--urgent:#CC3B2A;--text:#F5F5F5;--text2:#8A8A8A;--maxw:1120px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -32,43 +32,56 @@
   .wordmark .ai{color:var(--yellow);}
   .nav-back{font-size:15px;color:var(--text2);font-weight:600;}
   .nav-back:hover{color:var(--text);}
-  .hero{padding:80px 0 56px;text-align:center;}
+  .hero{padding:72px 0 40px;text-align:center;}
   .eyebrow{display:inline-block;color:var(--orange);font-weight:800;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:20px;}
   h1{font-size:clamp(32px,4.6vw,54px);line-height:1.08;font-weight:900;letter-spacing:-1px;max-width:16em;margin:0 auto;}
   h1 .hl{color:var(--yellow);}
   .hero p.sub{color:var(--text2);font-size:clamp(16.5px,2vw,19px);margin:24px auto 0;max-width:38em;}
   .hero p.sub strong{color:var(--text);}
-  section{padding:56px 0;}
+  .price{font-size:21px;font-weight:800;margin-top:22px;}
+  .price small{color:var(--text2);font-weight:600;font-size:15px;}
+  .hero-cta{
+    background:var(--yellow);color:#111;font-weight:800;font-size:17px;
+    padding:16px 32px;border-radius:14px;display:inline-block;margin-top:26px;
+    box-shadow:0 0 40px rgba(200,232,41,.18);
+  }
+  .hero-cta:hover{filter:brightness(1.08);}
+  section{padding:48px 0;}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   .card{background:var(--card);border:1px solid var(--divider);border-radius:22px;padding:32px 28px;}
   .card h3{font-size:20px;font-weight:800;margin-bottom:10px;}
   .card h3 .n{color:var(--yellow);margin-right:8px;}
   .card p{color:var(--text2);font-size:15.5px;}
   .card p strong{color:var(--text);}
-  .cta-band{
-    max-width:640px;margin:24px auto 0;background:var(--card);border:1.5px solid var(--orange);
-    border-radius:28px;padding:44px 40px;text-align:center;
-  }
-  .cta-band h2{font-size:clamp(24px,3vw,32px);font-weight:900;letter-spacing:-.4px;margin-bottom:12px;}
-  .cta-band p{color:var(--text2);font-size:16px;margin-bottom:26px;}
-  .cta-band p strong{color:var(--text);}
-  .btn-primary{
-    background:var(--yellow);color:#111;font-weight:800;font-size:17px;
-    padding:16px 32px;border-radius:14px;display:inline-block;
-  }
-  .btn-primary:hover{filter:brightness(1.08);}
-  .cta-note{color:var(--text2);font-size:13.5px;margin-top:16px;margin-bottom:0!important;}
-  .cta-note a{color:var(--yellow);}
-  footer{border-top:1px solid var(--divider);padding:36px 0;margin-top:40px;}
+
+  /* signup */
+  .signup{max-width:540px;margin:8px auto 40px;background:var(--card);border:1.5px solid var(--yellow);border-radius:24px;padding:36px 32px;box-shadow:0 0 80px rgba(200,232,41,.08);}
+  .signup h2{font-size:22px;font-weight:900;margin-bottom:4px;}
+  .signup .note{color:var(--text2);font-size:13.5px;margin-bottom:20px;}
+  label{display:block;color:var(--text2);font-size:11px;font-weight:700;letter-spacing:1px;margin:14px 0 6px;}
+  input{width:100%;background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;color:var(--text);
+    font-size:16px;padding:13px 14px;outline:none;}
+  input:focus{border-color:var(--yellow);}
+  .btn{width:100%;background:var(--yellow);color:#111;font-weight:800;font-size:16px;letter-spacing:.5px;
+    border:none;border-radius:12px;padding:15px;margin-top:22px;cursor:pointer;}
+  .btn:disabled{opacity:.55;cursor:default;}
+  .btn:hover:not(:disabled){filter:brightness(1.08);}
+  .msg{margin-top:14px;font-size:14px;color:var(--text2);text-align:center;min-height:20px;}
+  .msg.err{color:var(--urgent);}
+  .fineprint{color:var(--text2);font-size:12.5px;text-align:center;margin-top:16px;}
+  .fineprint a{color:var(--yellow);}
+  .hidden{display:none;}
+
+  footer{border-top:1px solid var(--divider);padding:36px 0;margin-top:24px;}
   .foot-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--text2);font-size:14px;}
   .foot-links{display:flex;gap:24px;}
   .foot-links a:hover{color:var(--text);}
   @media(max-width:860px){.grid{grid-template-columns:1fr;}}
   @media(max-width:600px){
-    .hero{padding:56px 0 40px;}
-    section{padding:36px 0;}
+    .hero{padding:52px 0 32px;}
+    section{padding:32px 0;}
     .card{padding:24px 20px;}
-    .cta-band{padding:32px 24px;}
+    .signup{padding:28px 22px;}
   }
 </style>
 </head>
@@ -77,7 +90,7 @@
 <nav>
   <div class="nav-inner">
     <a class="wordmark" href="/">SITELOG <span class="ai">AI</span></a>
-    <a class="nav-back" href="/">← Back to SiteLog AI</a>
+    <a class="nav-back" href="dashboard.html">Team dashboard →</a>
   </div>
 </nav>
 
@@ -86,6 +99,8 @@
     <span class="eyebrow">SiteLog for Teams</span>
     <h1>The record belongs to the job — <span class="hl">not the phone.</span></h1>
     <p class="sub">Per-seat team accounts for construction businesses. Your supers, foremen, and PMs all log the same fast way — and every log they take belongs to <strong>the company and the jobsite</strong>, building one consistent record that protects the business when issues arise.</p>
+    <div class="price">$19.99 <small>per person / month · 30-day free trial · cancel anytime</small></div>
+    <a class="hero-cta" href="#signup">Sign your team up</a>
   </div>
 </header>
 
@@ -106,27 +121,91 @@
   </div>
 </section>
 
-<section style="padding-top:12px;">
-  <div class="wrap">
-    <div class="cta-band">
-      <h2>Get your crew on the record.</h2>
-      <p>Team accounts open with the App Store launch. Tell us how many seats you need and you'll be first in line — <strong>30 days free</strong> for your whole crew.</p>
-      <a class="btn-primary" href="mailto:support@sitelog-ai.com?subject=SiteLog%20AI%20team%20account">Contact us to start a team</a>
-      <p class="cta-note">support@sitelog-ai.com · Individuals: <a href="/">start free at sitelog-ai.com</a></p>
-    </div>
+<div class="signup" id="signup">
+  <div id="step1">
+    <h2>Start your team</h2>
+    <div class="note">Three fields. No sales call.</div>
+    <label>COMPANY NAME</label>
+    <input id="company" placeholder="Armanini Builders" autocomplete="organization">
+    <label>YOUR WORK EMAIL</label>
+    <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
+    <label>SEATS (INCLUDING YOU — MINIMUM 2, CHANGE ANYTIME)</label>
+    <input id="seats" type="number" min="2" max="200" value="5">
+    <button class="btn" id="startBtn">START FREE TRIAL</button>
+    <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember.</div>
   </div>
-</section>
+  <div id="step2" class="hidden">
+    <h2>Check your email</h2>
+    <div class="note">Enter the 6-digit code we sent to <span id="sentTo"></span>.</div>
+    <label>CODE</label>
+    <input id="code" inputmode="numeric" maxlength="6" placeholder="000000">
+    <button class="btn" id="verifyBtn">CREATE TEAM</button>
+  </div>
+  <div class="msg" id="msg"></div>
+  <div class="fineprint">Questions first? <a href="mailto:support@sitelog-ai.com?subject=SiteLog%20AI%20team%20account">support@sitelog-ai.com</a> · Individuals: <a href="/">start free at sitelog-ai.com</a></div>
+</div>
 
 <footer>
   <div class="foot-inner">
     <span class="wordmark" style="font-size:17px;">SITELOG <span class="ai">AI</span></span>
     <div class="foot-links">
       <a href="/">Home</a>
+      <a href="dashboard.html">Team dashboard</a>
       <a href="privacy.html">Privacy Policy</a>
     </div>
     <span>© 2026 Block Management Services LLC</span>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SB_URL = "https://smogomdqivzomyggxlur.supabase.co";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtb2dvbWRxaXZ6b215Z2d4bHVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTA0NjQsImV4cCI6MjA4OTE2NjQ2NH0.Fy0d3fNTYn5ziSKXie6-dApmHN3DUwx5KsunYWXgaao";
+const sb = supabase.createClient(SB_URL, SB_KEY);
+const $ = (id) => document.getElementById(id);
+const msg = (t, err) => { const m = $("msg"); m.textContent = t; m.className = "msg" + (err ? " err" : ""); };
+
+$("startBtn").onclick = async () => {
+  const company = $("company").value.trim();
+  const email = $("email").value.trim().toLowerCase();
+  const seats = parseInt($("seats").value, 10);
+  if (company.length < 2) return msg("Enter your company name.", true);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("Enter a valid email.", true);
+  if (!(seats >= 2 && seats <= 200)) return msg("Teams start at two seats.", true);
+  $("startBtn").disabled = true; msg("Sending your code…");
+  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+  $("startBtn").disabled = false;
+  if (error) return msg(error.message, true);
+  $("sentTo").textContent = email;
+  $("step1").classList.add("hidden"); $("step2").classList.remove("hidden");
+  msg("");
+};
+
+$("verifyBtn").onclick = async () => {
+  const email = $("email").value.trim().toLowerCase();
+  const token = $("code").value.trim();
+  if (token.length !== 6) return msg("Enter the 6-digit code.", true);
+  $("verifyBtn").disabled = true; msg("Verifying…");
+  const { data, error } = await sb.auth.verifyOtp({ email, token, type: "email" });
+  if (error || !data.session) { $("verifyBtn").disabled = false; return msg(error?.message || "That code didn't work.", true); }
+
+  const company = $("company").value.trim();
+  const seats = Math.max(2, parseInt($("seats").value, 10));
+  const uid = data.session.user.id;
+  await sb.from("users").upsert({ id: uid, email, name: email.split("@")[0], company_name: company }, { onConflict: "id" });
+
+  msg("Creating your team…");
+  const call = (body) => fetch(SB_URL + "/functions/v1/team", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: SB_KEY, Authorization: "Bearer " + data.session.access_token },
+    body: JSON.stringify(body),
+  }).then((r) => r.json());
+
+  const created = await call({ action: "signup", company_name: company });
+  if (created.error && !/already on a team/i.test(created.error)) { $("verifyBtn").disabled = false; return msg(created.error, true); }
+  if (seats > 1) await call({ action: "set_seats", seats });
+  window.location.href = "dashboard.html";
+};
+</script>
 </body>
 </html>
