@@ -211,7 +211,14 @@ $("gSend").onclick = async () => {
   $("gSend").disabled = true; gMsg("Sending…");
   const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
   $("gSend").disabled = false;
-  if (error) return gMsg(error.message, true);
+  if (error) {
+    if (/signups not allowed/i.test(error.message)) {
+      $("gMsg").innerHTML = 'No SiteLog account with that email yet. <a href="teams.html" style="color:var(--yellow);text-decoration:underline;">Start your team here</a> — it takes one minute.';
+      $("gMsg").className = "msg";
+      return;
+    }
+    return gMsg(error.message, true);
+  }
   $("gSentTo").textContent = email;
   $("gateStep1").classList.add("hidden"); $("gateStep2").classList.remove("hidden"); gMsg("");
 };
