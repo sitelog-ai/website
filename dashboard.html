@@ -162,21 +162,23 @@ function render() {
   $("coSub").innerHTML = "<b>" + used + "</b> of <b>" + company.seat_count + "</b> seats in use · $19.99 per seat / month";
   $("seats").value = company.seat_count;
 
-  const joined = members.filter((m) => m.user_id);
+  const memberLabel = (m) => (m.is_admin ? "me" : m.email + (m.user_id ? "" : " (invited)"));
+  const holderOf = (p) => members.find((m) => (p.pending_member_id ? m.id === p.pending_member_id : m.user_id === p.user_id));
   $("projects").innerHTML = projects.map((p) => {
-    if (joined.length < 2) {
-      const holder = joined.find((m) => m.user_id === p.user_id);
+    if (members.length < 2) {
+      const holder = holderOf(p);
       return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + '</span></div>' +
-        '<span style="color:var(--text2);font-size:12.5px;">' + esc(holder ? holder.email : "unassigned") + "</span></div>";
+        '<span style="color:var(--text2);font-size:12.5px;">' + esc(holder ? memberLabel(holder) : "unassigned") + "</span></div>";
     }
-    const opts = joined.map((m) => '<option value="' + m.id + '"' + (m.user_id === p.user_id ? " selected" : "") + ">" + esc(m.email) + "</option>").join("");
+    const holder = holderOf(p);
+    const opts = members.map((m) => '<option value="' + m.id + '"' + (holder && holder.id === m.id ? " selected" : "") + ">" + esc(memberLabel(m)) + "</option>").join("");
     return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + '</span></div>' +
       '<select data-project="' + p.id + '">' + opts + "</select></div>";
   }).join("") || '<div class="row"><div class="who"><span>No jobs yet — add the first one below.</span></div></div>';
 
   const assign = $("pAssign");
-  assign.innerHTML = joined.map((m) => '<option value="' + m.id + '"' + (m.is_admin ? " selected" : "") + ">" + esc(m.is_admin ? "me" : m.email) + "</option>").join("");
-  assign.style.display = joined.length < 2 ? "none" : "";
+  assign.innerHTML = members.map((m) => '<option value="' + m.id + '"' + (m.is_admin ? " selected" : "") + ">" + esc(memberLabel(m)) + "</option>").join("");
+  assign.style.display = members.length < 2 ? "none" : "";
 
   $("members").innerHTML = members.map((m) => {
     const status = m.user_id ? '<span class="pill joined">ON THE JOB</span>' : '<span class="pill invited">INVITED</span>';
