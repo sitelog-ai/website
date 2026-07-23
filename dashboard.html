@@ -8,19 +8,19 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000000'/><rect x='18' y='44' width='8' height='16' rx='4' fill='%23C8E829'/><rect x='32' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='46' y='20' width='8' height='60' rx='4' fill='%23C8E829'/><rect x='60' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='74' y='44' width='8' height='16' rx='4' fill='%23C8E829'/></svg>">
 <style>
   :root{
-    --black:#000000; --card:#141414; --card2:#1A1A1A; --divider:#2C2C2C;
+    --black:#FAF9F5; --card:#FFFFFF; --card2:#FCFBF8; --divider:#E7E4DC;
     --yellow:#C8E829; --orange:#E87722; --urgent:#CC3B2A; --record:#4A7A4A;
-    --text:#F5F5F5; --text2:#8A8A8A; --maxw:860px;
+    --text:#17181C; --text2:#565B63; --maxw:860px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--black);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
   a{color:inherit;text-decoration:none;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px 80px;}
-  nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--divider);}
+  nav{position:sticky;top:0;z-index:50;background:rgba(250,249,245,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--divider);}
   .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
   .wordmark{font-weight:900;font-size:22px;letter-spacing:.5px;}
-  .wordmark .ai{color:var(--yellow);}
+  .wordmark .ai{color:#6E7D00;}
   .signout{color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;}
   .signout:hover{color:var(--text);}
   h1{font-size:26px;font-weight:900;margin:36px 0 4px;}
@@ -41,18 +41,18 @@
   .ghost{background:none;border:1.5px solid var(--divider);color:var(--text2);border-radius:10px;
     font-size:12.5px;font-weight:700;padding:7px 12px;cursor:pointer;}
   .ghost:hover{border-color:var(--urgent);color:var(--urgent);}
-  select{background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;color:var(--text);
+  select{background:#F5F3EE;border:1px solid var(--divider);border-radius:10px;color:var(--text);
     font-size:13.5px;padding:8px 10px;max-width:190px;}
   .addline{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
-  .addline input{flex:1;min-width:150px;background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;
+  .addline input{flex:1;min-width:150px;background:#F5F3EE;border:1px solid var(--divider);border-radius:10px;
     color:var(--text);font-size:14.5px;padding:11px 12px;outline:none;}
-  .addline input:focus{border-color:var(--yellow);}
+  .addline input:focus{border-color:#E87722;}
   .btn{background:var(--yellow);color:#111;font-weight:800;font-size:13.5px;letter-spacing:.5px;
     border:none;border-radius:10px;padding:11px 18px;cursor:pointer;white-space:nowrap;}
   .btn:hover{filter:brightness(1.08);}
   .btn:disabled{opacity:.55;cursor:default;}
   .seatline{display:flex;align-items:center;gap:12px;}
-  .seatline input{width:80px;background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;
+  .seatline input{width:80px;background:#F5F3EE;border:1px solid var(--divider);border-radius:10px;
     color:var(--text);font-size:15px;padding:9px 12px;text-align:center;}
   .hint{color:var(--text2);font-size:12.5px;margin-top:10px;}
   .msg{font-size:13.5px;color:var(--text2);min-height:18px;margin:-8px 0 14px;}
@@ -61,7 +61,7 @@
   .gate h2{font-size:20px;font-weight:900;margin-bottom:4px;}
   .gate .note{color:var(--text2);font-size:13.5px;margin-bottom:14px;}
   .gate label{display:block;color:var(--text2);font-size:11px;font-weight:700;letter-spacing:1px;margin:14px 0 6px;}
-  .gate input{width:100%;background:#0D0D0D;border:1px solid var(--divider);border-radius:10px;color:var(--text);
+  .gate input{width:100%;background:#F5F3EE;border:1px solid var(--divider);border-radius:10px;color:var(--text);
     font-size:16px;padding:13px 14px;outline:none;}
   .gate .btn{width:100%;font-size:15px;padding:14px;margin-top:20px;}
   .hidden{display:none;}
@@ -227,7 +227,7 @@ $("gSend").onclick = async () => {
   $("gSend").disabled = false;
   if (error) {
     if (/signups not allowed/i.test(error.message)) {
-      $("gMsg").innerHTML = 'No SiteLog account with that email yet. <a href="teams.html" style="color:var(--yellow);text-decoration:underline;">Start your team here</a> — it takes one minute.';
+      $("gMsg").innerHTML = 'No SiteLog account with that email yet. <a href="teams.html" style="color:#C25A0E;text-decoration:underline;">Start your team here</a> — it takes one minute.';
       $("gMsg").className = "msg";
       return;
     }
