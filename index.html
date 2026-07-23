@@ -78,18 +78,18 @@
 </script>
 <style>
   :root{
-    --black:#000000;
-    --card:#141414;
-    --card2:#1A1A1A;
-    --divider:#2C2C2C;
+    --black:#0B0C0E;
+    --card:#161719;
+    --card2:#1C1E21;
+    --divider:#2A2C30;
     --yellow:#C8E829;
     --orange:#E87722;
     --urgent:#CC3B2A;
     --task:#E8A020;
     --rfi:#2E6BA8;
     --record:#4A7A4A;
-    --text:#F5F5F5;
-    --text2:#8A8A8A;
+    --text:#F3F3F1;
+    --text2:#9BA0A6;
     --maxw:1120px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -109,7 +109,7 @@
   /* ============ NAV ============ */
   nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(0,0,0,.85);
+    background:rgba(11,12,14,.85);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--divider);
   }
@@ -178,9 +178,9 @@
 
   /* ============ PHONE FRAME ============ */
   .phone{
-    width:300px;background:#0A0A0A;border-radius:44px;
+    width:300px;background:#0B0C0D;border-radius:44px;
     border:1.5px solid #2a2a2a;
-    box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 0 8px #0d0d0d, 0 0 90px rgba(200,232,41,.06);
+    box-shadow:0 40px 90px rgba(0,0,0,.65),0 0 0 1.5px rgba(255,255,255,.06),0 0 0 9px #0B0C0D, 0 0 100px rgba(200,232,41,.05);
     padding:12px;margin:0 auto;flex-shrink:0;
   }
   .phone-screen{
@@ -219,7 +219,7 @@
     display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--divider);
     border-radius:24px;overflow:hidden;margin-top:8px;
   }
-  .col-them{background:#101010;}
+  .col-them{background:#191B1E;}
   .col-us{background:var(--card2);border-left:1px solid var(--divider);position:relative;}
   .col-us::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--yellow);}
   .compare .col-h{
@@ -521,6 +521,35 @@
     .m-hide{display:none;}
   }
 
+  /* ============ HERO PHONE SPOTLIGHT (dark act) ============ */
+  .hero .f-visual{position:relative;}
+  .hero .f-visual::before{content:"";position:absolute;left:50%;top:50%;width:440px;height:440px;transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side,rgba(200,232,41,.12),transparent 70%);pointer-events:none;z-index:0;}
+  .hero .phone{position:relative;z-index:1;
+    box-shadow:0 44px 100px rgba(0,0,0,.7),0 0 0 1.5px rgba(255,255,255,.08),0 0 0 9px #17181B, 0 0 130px rgba(200,232,41,.12);}
+
+  /* ============ LIGHT DEMO ZONE (Split Act) ============ */
+  .lightzone{
+    background:#F4F2EC;
+    --black:#F4F2EC;--card:#FFFFFF;--card2:#FBFAF6;--divider:#E4E1D8;
+    --text:#191A1E;--text2:#585D66;
+    color:var(--text);
+  }
+  .lightzone .eyebrow{color:#B85511;}
+  .lightzone .hl,.lightzone h1 .hl,.lightzone h2 .hl,.lightzone h3 .hl,.lightzone .mani-inner h2 .hl,.lightzone .mani-punch .hl{color:#C25A0E;}
+  .lightzone .f-kicker.yel{color:#8A5A0A;background:rgba(232,119,34,.12);}
+  .lightzone .f-kicker.org{color:#B85511;background:rgba(232,119,34,.12);}
+  .lightzone .f-list li::before{color:#E87722;}
+  .lightzone .steps-tag strong{color:#C25A0E;}
+  .lightzone .receipt .n{color:#C25A0E;}
+  .lightzone .price-card .plan{color:#C25A0E;}
+  .lightzone .price-feats li::before{color:#5C8A2B;}
+  .lightzone .price-card{border-color:#E87722;box-shadow:0 30px 80px rgba(232,119,34,.12);}
+  .lightzone .why-card .ico{background:rgba(232,119,34,.12);color:#E87722;}
+  .lightzone .manifesto{background:#EDEBE3;border-color:#E4E1D8;}
+  .lightzone .phone{box-shadow:0 26px 55px rgba(20,22,28,.20),0 0 0 1px rgba(0,0,0,.10),0 0 0 9px #0B0C0D;}
+  .lightzone .doc{box-shadow:0 26px 60px rgba(20,22,28,.18),0 0 0 1px rgba(0,0,0,.06);}
+
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
   .reveal.in{opacity:1;transform:none;}
   @media(prefers-reduced-motion:reduce){
@@ -621,6 +650,7 @@
   </div>
 </section>
 
+<div class="lightzone">
 <!-- ================= HOW IT WORKS ================= -->
 <section id="how" style="padding-top:24px;">
   <div class="wrap">
@@ -994,6 +1024,8 @@
     </div>
   </div>
 </section>
+
+</div><!-- /lightzone -->
 
 <!-- ================= FINAL CTA ================= -->
 <div class="final">
