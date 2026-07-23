@@ -562,6 +562,9 @@
   .lightzone .manifesto{background:#F2EFE8;border-color:#E7E4DC;}
   .lightzone .phone{box-shadow:0 26px 55px rgba(20,22,28,.20),0 0 0 1px rgba(0,0,0,.10),0 0 0 9px #0B0C0D;}
   .lightzone .doc{box-shadow:0 26px 60px rgba(20,22,28,.18),0 0 0 1px rgba(0,0,0,.06);}
+  .lightzone .wordmark .ai{color:#C25A0E;}
+  /* smooth dark→light transition — no hard seam, no flat grey block */
+  .fadeband{height:190px;background:linear-gradient(180deg,#000 0%,#000 34%,#FAF9F5 100%);}
 
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
   .reveal.in{opacity:1;transform:none;}
@@ -663,6 +666,7 @@
   </div>
 </section>
 
+<div class="fadeband" aria-hidden="true"></div>
 <div class="lightzone">
 <!-- ================= HOW IT WORKS ================= -->
 <section id="how" style="padding-top:24px;">
@@ -1052,8 +1056,6 @@
   </div>
 </section>
 
-</div><!-- /lightzone -->
-
 <!-- ================= FINAL CTA ================= -->
 <div class="final">
   <h2>Put down the clipboard.<br>Pick up the record.</h2>
@@ -1077,6 +1079,7 @@
     <span>© 2026 Block Management Services LLC</span>
   </div>
 </footer>
+</div><!-- /lightzone -->
 
 <script>
   const io = new IntersectionObserver((entries)=>{
