@@ -179,7 +179,7 @@
       <span class="t2" id="ptotal">$39.98/mo after trial</span>
     </div>
     <button class="btn" id="createBtn">CREATE TEAM — 30 DAYS FREE</button>
-    <div class="fineprint">By creating a team you agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. No payment method required during your trial.</div>
+    <div class="fineprint">By creating a team you agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. A card is required to start your 30-day trial — you won't be charged until the trial ends, and cancelling before then costs nothing.</div>
     <div class="fineprint">Each job's reports go to the super you put on it. Jobs load automatically the first time each super signs in to the app.</div>
   </div>
 
@@ -338,7 +338,15 @@ async function call(body) {
   }).then(r => r.json()).catch(() => ({ error: "Network error" }));
 }
 
+let teamReady = false;
 $("createBtn").onclick = async () => {
+  if (teamReady) {
+    $("createBtn").disabled = true; msg("Opening secure checkout…");
+    const co = await call({ action: "checkout" });
+    if (co.url) { window.location.href = co.url; return; }
+    $("createBtn").disabled = false;
+    return msg(co.error || "Couldn't open checkout — try again or contact support@sitelog-ai.com.", true);
+  }
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   for (const m of crew) {
     if (!m.admin && !emailRe.test(m.email.trim().toLowerCase())) return msg("Every team member needs a valid email.", true);
@@ -376,12 +384,17 @@ $("createBtn").onclick = async () => {
       if (out.error) problems.push(j.n.trim() + ": " + out.error);
     }
   }
-  if (problems.length) {
-    $("createBtn").disabled = false;
-    return msg("Team created, but some items need attention on your dashboard: " + problems.join(" · "), true);
+  msg("Team created — opening secure checkout to start your trial…");
+  const co = await call({ action: "checkout" });
+  if (co.url) {
+    if (problems.length) console.warn("setup notes:", problems);
+    window.location.href = co.url;
+    return;
   }
-  msg("Team created — opening your dashboard…");
-  window.location.href = "dashboard.html";
+  $("createBtn").disabled = false;
+  $("createBtn").textContent = "ADD CARD & START TRIAL";
+  teamReady = true;
+  msg(co.error || "Your team is created — one step left: add your card to start the trial. Tap the button to try again.", true);
 };
 </script>
 </body>
