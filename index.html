@@ -78,18 +78,18 @@
 </script>
 <style>
   :root{
-    --black:#000000;
-    --card:#0E0F11;
-    --card2:#141517;
-    --divider:#26282C;
+    --black:#FAF9F5;
+    --card:#FFFFFF;
+    --card2:#FCFBF8;
+    --divider:#E7E4DC;
     --yellow:#C8E829;
     --orange:#E87722;
     --urgent:#CC3B2A;
     --task:#E8A020;
     --rfi:#2E6BA8;
     --record:#4A7A4A;
-    --text:#F3F3F1;
-    --text2:#9BA0A6;
+    --text:#17181C;
+    --text2:#565B63;
     --maxw:1120px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -109,7 +109,7 @@
   /* ============ NAV ============ */
   nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(0,0,0,.85);
+    background:rgba(250,249,245,.85);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--divider);
   }
@@ -118,7 +118,7 @@
     display:flex;align-items:center;justify-content:space-between;gap:16px;
   }
   .wordmark{font-weight:900;font-size:22px;letter-spacing:.5px;white-space:nowrap;}
-  .wordmark .ai{color:var(--yellow);}
+  .wordmark .ai{color:#6E7D00;}
   .nav-links{display:flex;gap:28px;font-size:15px;color:var(--text2);font-weight:600;}
   .nav-links a:hover{color:var(--text);}
   .nav-cta{
@@ -219,23 +219,23 @@
     display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--divider);
     border-radius:24px;overflow:hidden;margin-top:8px;
   }
-  .col-them{background:#191B1E;}
-  .col-us{background:var(--card2);border-left:1px solid var(--divider);position:relative;}
+  .col-them{background:#F0EDE6;}
+  .col-us{background:#FFFFFF;border-left:1px solid var(--divider);position:relative;}
   .col-us::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--yellow);}
   .compare .col-h{
     padding:26px 30px 10px;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
   }
   .col-them .col-h{color:var(--text2);}
-  .col-us .col-h{color:var(--yellow);}
+  .col-us .col-h{color:#B85511;}
   .compare ul{list-style:none;padding:8px 30px 30px;}
   .compare li{
-    padding:13px 0;border-top:1px solid rgba(255,255,255,.05);font-size:15.5px;line-height:1.45;
+    padding:13px 0;border-top:1px solid rgba(0,0,0,.06);font-size:15.5px;line-height:1.45;
     display:flex;gap:11px;align-items:baseline;
   }
   .col-them li{color:var(--text2);}
-  .col-them li::before{content:"✕";color:#5c5c5c;font-weight:800;flex-shrink:0;}
+  .col-them li::before{content:"✕";color:#C0564A;font-weight:800;flex-shrink:0;}
   .col-us li{color:var(--text);font-weight:600;}
-  .col-us li::before{content:"✓";color:var(--yellow);font-weight:900;flex-shrink:0;}
+  .col-us li::before{content:"✓";color:#5C8A2B;font-weight:900;flex-shrink:0;}
   .col-us li span{color:var(--text2);font-weight:400;}
   @media(max-width:800px){
     .compare{grid-template-columns:1fr;}
@@ -534,14 +534,7 @@
     .m-hide{display:none;}
   }
 
-  /* ============ HERO PHONE SPOTLIGHT (dark act) ============ */
-  .hero .f-visual{position:relative;}
-  .hero .f-visual::before{content:"";position:absolute;left:50%;top:50%;width:440px;height:440px;transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side,rgba(200,232,41,.12),transparent 70%);pointer-events:none;z-index:0;}
-  .hero .phone{position:relative;z-index:1;
-    box-shadow:0 44px 100px rgba(0,0,0,.7),0 0 0 1.5px rgba(255,255,255,.08),0 0 0 9px #17181B, 0 0 130px rgba(200,232,41,.12);}
-
-  /* ============ LIGHT DEMO ZONE (Split Act) ============ */
+  /* ============ SITE-WIDE LIGHT THEME ============ */
   .lightzone{
     background:#FAF9F5;
     --black:#FAF9F5;--card:#FFFFFF;--card2:#FCFBF8;--divider:#E7E4DC;
@@ -559,7 +552,7 @@
   .lightzone .price-feats li::before{color:#5C8A2B;}
   .lightzone .price-card{border-color:#E87722;box-shadow:0 30px 80px rgba(232,119,34,.12);}
   .lightzone .why-card .ico{background:rgba(232,119,34,.12);color:#E87722;}
-  .lightzone .manifesto{background:#F2EFE8;border-color:#E7E4DC;}
+  .lightzone .manifesto{background:transparent;border-color:#E7E4DC;}
   .lightzone .phone{box-shadow:0 26px 55px rgba(20,22,28,.20),0 0 0 1px rgba(0,0,0,.10),0 0 0 9px #0B0C0D;}
   .lightzone .doc{box-shadow:0 26px 60px rgba(20,22,28,.18),0 0 0 1px rgba(0,0,0,.06);}
   .lightzone .wordmark .ai{color:#C25A0E;}
@@ -591,6 +584,7 @@
   </div>
 </nav>
 
+<div class="lightzone">
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
   <div class="wrap hero-grid">
@@ -666,8 +660,6 @@
   </div>
 </section>
 
-<div class="fadeband" aria-hidden="true"></div>
-<div class="lightzone">
 <!-- ================= HOW IT WORKS ================= -->
 <section id="how" style="padding-top:24px;">
   <div class="wrap">
