@@ -127,7 +127,7 @@
       <button class="btn" id="seatSave">UPDATE SEATS</button>
       <button class="btn" id="billingBtn" style="margin-left:auto;">MANAGE BILLING</button>
     </div>
-    <div class="hint">$19.99 per seat per month. Seat changes prorate automatically. Card, invoices, and receipts live in Manage billing.</div>
+    <div class="hint">$24.99 per seat per month. Seat changes prorate automatically. Card, invoices, and receipts live in Manage billing.</div>
   </div>
 </div>
 
@@ -159,7 +159,7 @@ function render() {
   $("coName").innerHTML = esc(company.name) +
     (company.status === "trialing" ? '<span class="trial">TRIAL — ENDS ' + new Date(company.trial_ends_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }).toUpperCase() + "</span>" : "");
   const used = members.length;
-  $("coSub").innerHTML = "<b>" + used + "</b> of <b>" + company.seat_count + "</b> seats in use · $19.99 per seat / month";
+  $("coSub").innerHTML = "<b>" + used + "</b> of <b>" + company.seat_count + "</b> seats in use · $24.99 per seat / month";
   $("seats").value = company.seat_count;
 
   const memberLabel = (m) => (m.is_admin ? "me" : m.email + (m.user_id ? "" : " (invited)"));

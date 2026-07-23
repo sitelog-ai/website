@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SiteLog AI for Teams — The record belongs to the job, not the phone.</title>
-<meta name="description" content="Per-seat SiteLog AI team accounts for construction businesses. Every jobsite's logs stay with the company and handoffs take one tap. $19.99 per person per month — build your crew in one minute, 30 days free.">
+<meta name="description" content="Per-seat SiteLog AI team accounts for construction businesses. Every jobsite's logs stay with the company and handoffs take one tap. $24.99 per person per month — build your crew in one minute, 30 days free.">
 <link rel="canonical" href="https://sitelog-ai.com/teams.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sitelog-ai.com/teams.html">
@@ -125,7 +125,7 @@
     <span class="eyebrow">SiteLog for Teams</span>
     <h1>The record belongs to the job — <span class="hl">not the phone.</span></h1>
     <p class="sub">Per-seat team accounts for construction businesses. Your supers, foremen, and PMs all log the same fast way — and every log they take belongs to <strong>the company and the jobsite</strong>, building one consistent record that protects the business when issues arise.</p>
-    <div class="price">$19.99 <small>per person / month · 30-day free trial · cancel anytime</small></div>
+    <div class="price">$24.99 <small>per person / month · 30-day free trial · cancel anytime</small></div>
     <a class="hero-cta" href="#signup">Sign your team up</a>
   </div>
 </header>
@@ -215,7 +215,7 @@ function tally() {
   const jobs = crew.reduce((s, m) => s + m.jobs.length, 0);
   const seats = Math.max(2, crew.length);
   $("tally").textContent = crew.length + (crew.length === 1 ? " person" : " people") + " · " + jobs + (jobs === 1 ? " job" : " jobs") + (crew.length === 1 ? " · teams start at 2 seats" : "");
-  $("ptotal").textContent = "$" + (seats * 19.99).toFixed(2) + "/mo after trial";
+  $("ptotal").textContent = "$" + (seats * 24.99).toFixed(2) + "/mo after trial";
 }
 
 function render() {
