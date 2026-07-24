@@ -559,6 +559,19 @@
   /* smooth dark→light transition — no hard seam, no flat grey block */
   .fadeband{height:190px;background:linear-gradient(180deg,#000 0%,#000 34%,#FAF9F5 100%);}
 
+  /* pre-launch notice for App Store CTAs */
+  .launch-note{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+    background:#fff;border:1px solid var(--divider);border-radius:14px;
+    padding:15px 46px 15px 18px;box-shadow:0 18px 50px rgba(20,22,28,.18);
+    font-size:14.5px;line-height:1.45;color:var(--text);max-width:min(92vw,520px);
+    opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:100;
+  }
+  .launch-note.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+  .launch-note a{color:#C25A0E;font-weight:700;text-decoration:underline;}
+  .launch-note .ln-x{position:absolute;top:9px;right:11px;background:none;border:none;
+    color:var(--text2);font-size:15px;cursor:pointer;line-height:1;padding:4px;}
+
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
   .reveal.in{opacity:1;transform:none;}
   @media(prefers-reduced-motion:reduce){
@@ -593,7 +606,7 @@
       <h1>Snap. Talk. <span class="hl">Done.</span></h1>
       <p class="sub">SiteLog AI is the fastest way to document a jobsite and get the word out — built for <strong>work gloves, sunlight, and thirty-second windows between problems</strong>. See it, log it, send it — <strong>on the record before the next problem finds you.</strong></p>
       <div class="cta-row">
-        <a class="btn-primary" href="#pricing">Try it free for 14 days</a>
+        <a class="btn-primary js-appstore" href="#pricing">Try it free for 14 days</a>
         <a class="btn-ghost" href="#how">See how it works</a>
       </div>
       <p class="hero-note"><strong>14 days free.</strong> Then $29.99/month. Team accounts available.</p>
@@ -1040,7 +1053,7 @@
           <li>The daily Record — kept for the life of the job</li>
           <li>3 jobsites, offline capture</li>
         </ul>
-        <a class="btn-ghost" href="#top" style="display:block;text-align:center;">Coming to the App Store</a>
+        <a class="btn-ghost js-appstore" href="#top" style="display:block;text-align:center;">Coming to the App Store</a>
         <p class="price-note">Download the app and start your 14-day free trial in one tap — billed by Apple, cancel anytime in your App Store settings.</p>
       </div>
 
@@ -1053,7 +1066,7 @@
   <h2>Put down the clipboard.<br>Pick up the record.</h2>
   <p>Thirty seconds to log it. Seconds to share it. Saved for the life of the job.</p>
   <div class="cta-row">
-    <a class="btn-primary" href="#pricing">Try SiteLog AI free for 14 days</a>
+    <a class="btn-primary js-appstore" href="#pricing">Try SiteLog AI free for 14 days</a>
   </div>
 </div>
 
@@ -1072,6 +1085,40 @@
   </div>
 </footer>
 </div><!-- /lightzone -->
+
+<div class="launch-note" id="launchNote" role="status" aria-live="polite">
+  <strong>Launching on the App Store shortly.</strong> Running a crew? <a href="teams.html">Team accounts are live today &rarr;</a>
+  <button class="ln-x" type="button" aria-label="Dismiss">&#10005;</button>
+</div>
+
+<script>
+  /* ===== APP STORE LAUNCH SWITCH =====================================
+     On launch day: set APP_IS_LIVE = true. Every download CTA on the site
+     then points straight at the App Store listing. Nothing else to change.
+  ==================================================================== */
+  var APP_STORE_URL = "https://apps.apple.com/app/id6768819001";
+  var APP_IS_LIVE = false;
+
+  (function () {
+    var note = document.getElementById("launchNote"), timer;
+    function showNote() {
+      if (!note) return;
+      note.classList.add("show");
+      clearTimeout(timer);
+      timer = setTimeout(function () { note.classList.remove("show"); }, 6000);
+    }
+    document.querySelectorAll(".js-appstore").forEach(function (a) {
+      if (APP_IS_LIVE) {
+        a.href = APP_STORE_URL;
+        a.target = "_blank";
+        a.rel = "noopener";
+      } else {
+        a.addEventListener("click", function (e) { e.preventDefault(); showNote(); });
+      }
+    });
+    if (note) note.querySelector(".ln-x").addEventListener("click", function () { note.classList.remove("show"); });
+  })();
+</script>
 
 <script>
   const io = new IntersectionObserver((entries)=>{
