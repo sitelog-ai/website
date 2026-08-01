@@ -13,7 +13,7 @@
   "mainEntity": [
     { "@type": "Question", "name": "Who can see whose logs on a team account?", "acceptedAnswer": { "@type": "Answer", "text": "On a team account the logs belong to the company. The admin assigns each job to a super, and each job keeps its own logs, daily records, and Vault, so one job's history never bleeds into another's." } },
     { "@type": "Question", "name": "What happens to our record if we cancel?", "acceptedAnswer": { "@type": "Answer", "text": "Your record stays readable and exportable. Every report is emailed to you as a PDF, so the history lives in your own inbox. Cancel anytime from the dashboard; service runs to the end of the paid period." } },
-    { "@type": "Question", "name": "How do seats change mid-month?", "acceptedAnswer": { "@type": "Answer", "text": "Change the seat count anytime from the dashboard. Increases and decreases are prorated automatically by Stripe. There is a 2-seat minimum." } },
+    { "@type": "Question", "name": "How do seats and billing work?", "acceptedAnswer": { "@type": "Answer", "text": "Seats count themselves. Every teammate you add is a billed seat at $24.99 per month; the admin's own seat is free unless a job is assigned to it. Add or remove people anytime and the bill prorates automatically. No seat minimum." } },
     { "@type": "Question", "name": "Can a log be edited or deleted after it is filed?", "acceptedAnswer": { "@type": "Answer", "text": "No, by design. Once a log is filed it cannot be altered, and each day is sealed overnight into a tamper-evident daily record. Corrections are filed as a new log." } },
     { "@type": "Question", "name": "Who owns the data, and is it secure?", "acceptedAnswer": { "@type": "Answer", "text": "On a team account, logs captured under company jobsites belong to the company. Data is encrypted in transit, access is limited to the authenticated account, and content is never sold or used to train AI models." } },
     { "@type": "Question", "name": "What does the crew have to do to get started?", "acceptedAnswer": { "@type": "Answer", "text": "The moment you invite someone, they get an email with a link to download SiteLog AI free from the Apple App Store and instructions to sign in with their work email. Their assigned jobs are already waiting and their seat is covered, so nobody on the crew enters a card." } }
@@ -354,8 +354,8 @@
         <div class="a">Your record stays readable and exportable — every report is emailed to you as a PDF for exactly this reason, so the history lives in your own inbox, not locked in ours. <strong>We will never hold your record hostage.</strong> Cancel anytime from the dashboard's Manage billing; service runs to the end of the period you've paid for.</div>
       </details>
       <details>
-        <summary>How do seats change mid-month?</summary>
-        <div class="a">Change the seat count anytime from the dashboard. Increases and decreases are <strong>prorated automatically by Stripe</strong> — add a super in the middle of a job and you're only billed for the days you use. There's a 2-seat minimum.</div>
+        <summary>How do seats and billing work?</summary>
+        <div class="a">Seats count themselves. <strong>Every teammate you add is a billed seat</strong> at $24.99/mo — and <strong>your own seat is free</strong> unless you put a job on it. Add a super mid-month and the bill <strong>prorates automatically</strong>; remove one and it prorates down. No seat minimum, no seat math.</div>
       </details>
       <details>
         <summary>Can a super quietly edit or delete a log?</summary>
@@ -385,6 +385,8 @@
     <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
     <button class="btn" id="startBtn">CONTINUE</button>
     <div class="fineprint">You become the account admin. We email you a 6-digit code to verify — no password to remember.</div>
+    <div class="fineprint">By continuing you agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. Creating a team is free — <strong>$24.99/mo per teammate</strong> once you add your crew (30 days free, card required then). Your own seat is free until you put a job on it.</div>
+    <div class="fineprint">Already have a team? <a href="dashboard.html">Sign in to your dashboard →</a></div>
   </div>
 
   <div id="step2" class="hidden">
@@ -396,18 +398,8 @@
   </div>
 
   <div id="step3" class="hidden">
-    <h2>Build your crew</h2>
-    <div class="note">Add each person once, and their jobs under them. Everything can change later from your dashboard.</div>
-    <div id="members"></div>
-    <button class="ghostbtn wide" id="addMember">+ Add next team member</button>
-    <div class="tallybar">
-      <span class="t1" id="tally">1 person · 0 jobs</span>
-      <span class="t2" id="ptotal">$24.99/mo after trial</span>
-    </div>
-    <button class="btn" id="createBtn">CREATE TEAM — 30 DAYS FREE</button>
-    <div class="fineprint">By creating a team you agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. A card is required to start your 30-day trial — you won't be charged until the trial ends, and cancelling before then costs nothing.</div>
-    <div class="fineprint">Each job's reports go to the super you put on it. Jobs load automatically the first time each super signs in to the app.</div>
-    <div class="fineprint">Invite someone and we email them a link to download SiteLog AI free from the Apple App Store, plus how to sign in with their work email — their seat is already covered, so nobody on your crew ever enters a card.</div>
+    <h2>You're in.</h2>
+    <div class="note">Taking you to your team dashboard — add your jobs and crew there.</div>
   </div>
 
   <div class="msg" id="msg"></div>
@@ -436,93 +428,6 @@ const $ = (id) => document.getElementById(id);
 const msg = (t, err) => { const m = $("msg"); m.textContent = t; m.className = "msg" + (err ? " err" : ""); };
 const esc = (s) => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
 
-let crew = [];
-
-function tally() {
-  const jobs = crew.reduce((s, m) => s + m.jobs.length, 0);
-  const seats = Math.max(2, crew.length);
-  $("tally").textContent = crew.length + (crew.length === 1 ? " person" : " people") + " · " + jobs + (jobs === 1 ? " job" : " jobs") + (crew.length === 1 ? " · teams start at 2 seats" : "");
-  $("ptotal").textContent = "$" + (seats * 24.99).toFixed(2) + "/mo after trial";
-}
-
-function render() {
-  const wrap = $("members");
-  wrap.innerHTML = "";
-  crew.forEach((m, mi) => {
-    const card = document.createElement("div");
-    card.className = "member";
-    let jobs = "";
-    m.jobs.forEach((j, ji) => {
-      jobs += '<div class="jobrow">'
-        + '<input placeholder="Job name" value="' + esc(j.n) + '" data-m="' + mi + '" data-j="' + ji + '" data-f="n">'
-        + '<span class="addr"><input placeholder="Job address — start typing" value="' + esc(j.a) + '" data-m="' + mi + '" data-j="' + ji + '" data-f="a" autocomplete="off"><span class="drop"></span></span>'
-        + '<button class="ghostbtn small" data-deljob="' + mi + ':' + ji + '" aria-label="Remove job">✕</button>'
-        + '</div>';
-    });
-    card.innerHTML =
-      '<div class="member-head"><span>' + (m.admin ? "YOU · ADMIN" : "TEAM MEMBER " + (mi + 1)) + '</span>'
-      + (m.admin ? "" : '<button class="ghostbtn" style="margin-top:0;padding:5px 12px;font-size:12px;" data-delmem="' + mi + '">Remove</button>')
-      + '</div>'
-      + '<div class="two">'
-      + '<input placeholder="Name" value="' + esc(m.name) + '" data-m="' + mi + '" data-f="name"' + (m.admin ? " disabled" : "") + '>'
-      + '<input placeholder="super@company.com" value="' + esc(m.email) + '" data-m="' + mi + '" data-f="email"' + (m.admin ? " disabled" : "") + '>'
-      + '</div>'
-      + jobs
-      + '<button class="ghostbtn" data-addjob="' + mi + '">+ Add another job for this person</button>';
-    wrap.appendChild(card);
-  });
-  tally();
-
-  wrap.querySelectorAll("[data-addjob]").forEach(b => b.onclick = () => { crew[+b.dataset.addjob].jobs.push({ n: "", a: "" }); render(); });
-  wrap.querySelectorAll("[data-delmem]").forEach(b => b.onclick = () => { crew.splice(+b.dataset.delmem, 1); render(); });
-  wrap.querySelectorAll("[data-deljob]").forEach(b => b.onclick = () => { const p = b.dataset.deljob.split(":"); crew[+p[0]].jobs.splice(+p[1], 1); render(); });
-
-  wrap.querySelectorAll("input[data-f]").forEach(inp => {
-    inp.oninput = () => {
-      const m = crew[+inp.dataset.m];
-      if (inp.dataset.f === "n" || inp.dataset.f === "a") m.jobs[+inp.dataset.j][inp.dataset.f] = inp.value;
-      else m[inp.dataset.f] = inp.value;
-      if (inp.dataset.f === "a") suggest(inp);
-      tally();
-    };
-  });
-}
-
-let suggestTimer = null;
-function suggest(inp) {
-  const drop = inp.parentElement.querySelector(".drop");
-  const q = inp.value.trim();
-  clearTimeout(suggestTimer);
-  if (q.length < 4) { drop.innerHTML = ""; return; }
-  suggestTimer = setTimeout(async () => {
-    try {
-      const res = await fetch("https://photon.komoot.io/api/?q=" + encodeURIComponent(q) + "&limit=6&lang=en");
-      const data = await res.json();
-      const seen = new Set();
-      const hits = (data.features || [])
-        .filter(f => f.properties.countrycode === "US")
-        .sort((x, y) => (y.properties.housenumber ? 1 : 0) - (x.properties.housenumber ? 1 : 0))
-        .map(f => {
-          const p = f.properties;
-          const line1 = p.housenumber && p.street ? p.housenumber + " " + p.street : (p.name || p.street || "");
-          const line2 = [p.city, p.state, p.postcode].filter(Boolean).join(", ");
-          return { line1, line2, full: [line1, line2].filter(Boolean).join(", ") };
-        })
-        .filter(h => h.line1 && !seen.has(h.full) && seen.add(h.full))
-        .slice(0, 3);
-      drop.innerHTML = hits.map(h => '<div data-pick="' + esc(h.full) + '">' + esc(h.line1) + '<small>' + esc(h.line2) + '</small></div>').join("");
-      drop.querySelectorAll("[data-pick]").forEach(d => d.onclick = () => {
-        inp.value = d.dataset.pick;
-        crew[+inp.dataset.m].jobs[+inp.dataset.j].a = d.dataset.pick;
-        drop.innerHTML = "";
-      });
-    } catch (_) { drop.innerHTML = ""; }
-  }, 300);
-}
-
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".addr")) document.querySelectorAll(".drop").forEach(d => d.innerHTML = "");
-});
 
 $("startBtn").onclick = async () => {
   const company = $("company").value.trim();
@@ -548,12 +453,17 @@ $("verifyBtn").onclick = async () => {
   const { data, error } = await sb.auth.verifyOtp({ email, token, type: "email" });
   if (error || !data.session) { $("verifyBtn").disabled = false; return msg(error?.message || "That code didn't work.", true); }
   await sb.from("users").upsert({ id: data.session.user.id, email, name: $("adminName").value.trim() || email.split("@")[0], company_name: $("company").value.trim() }, { onConflict: "id" });
-  crew = [{ name: $("adminName").value.trim(), email, admin: true, jobs: [{ n: "", a: "" }] }];
-  $("step2").classList.add("hidden"); $("step3").classList.remove("hidden");
-  render(); msg("");
+  msg("Creating your team…");
+  const created = await call({ action: "signup", company_name: $("company").value.trim() });
+  // "Already on a team" is a returning admin — the dashboard is theirs too.
+  if (created.error && !/already on a team/i.test(created.error)) {
+    $("verifyBtn").disabled = false;
+    return msg(created.error, true);
+  }
+  $("step2").classList.add("hidden"); $("step3").classList.remove("hidden"); msg("");
+  window.location.href = "dashboard.html";
 };
 
-$("addMember").onclick = () => { crew.push({ name: "", email: "", admin: false, jobs: [{ n: "", a: "" }] }); render(); };
 
 async function call(body) {
   const { data: { session } } = await sb.auth.getSession();
@@ -565,64 +475,6 @@ async function call(body) {
   }).then(r => r.json()).catch(() => ({ error: "Network error" }));
 }
 
-let teamReady = false;
-$("createBtn").onclick = async () => {
-  if (teamReady) {
-    $("createBtn").disabled = true; msg("Opening secure checkout…");
-    const co = await call({ action: "checkout" });
-    if (co.url) { window.location.href = co.url; return; }
-    $("createBtn").disabled = false;
-    return msg(co.error || "Couldn't open checkout — try again or contact support@sitelog-ai.com.", true);
-  }
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  for (const m of crew) {
-    if (!m.admin && !emailRe.test(m.email.trim().toLowerCase())) return msg("Every team member needs a valid email.", true);
-    for (const j of m.jobs) {
-      const hasAny = j.n.trim() || j.a.trim();
-      if (hasAny && (j.n.trim().length < 2 || j.a.trim().length < 2)) return msg("Each job needs a name and an address (or remove the empty row).", true);
-    }
-  }
-  const emails = crew.map(m => m.email.trim().toLowerCase()).filter(Boolean);
-  if (new Set(emails).size !== emails.length) return msg("Two team members have the same email.", true);
-
-  $("createBtn").disabled = true;
-  msg("Creating your team…");
-  const created = await call({ action: "signup", company_name: $("company").value.trim() });
-  if (created.error && !/already on a team/i.test(created.error)) { $("createBtn").disabled = false; return msg(created.error, true); }
-
-  const seats = Math.max(2, crew.length);
-  await call({ action: "set_seats", seats });
-
-  const problems = [];
-  const memberIds = {};
-  for (const m of crew) {
-    if (!m.admin) {
-      msg("Inviting " + m.email + "…");
-      const out = await call({ action: "invite", email: m.email.trim().toLowerCase() });
-      if (out.error && !/already on the team/i.test(out.error)) problems.push(m.email + ": " + out.error);
-      if (out.member) memberIds[m.email.trim().toLowerCase()] = out.member.id;
-    }
-  }
-  for (const m of crew) {
-    for (const j of m.jobs) {
-      if (!j.n.trim() || !j.a.trim()) continue;
-      msg("Adding job " + j.n.trim() + "…");
-      const out = await call({ action: "add_project", project_name: j.n.trim(), address: j.a.trim(), report_email: m.email.trim().toLowerCase(), member_id: m.admin ? null : (memberIds[m.email.trim().toLowerCase()] || null) });
-      if (out.error) problems.push(j.n.trim() + ": " + out.error);
-    }
-  }
-  msg("Team created — opening secure checkout to start your trial…");
-  const co = await call({ action: "checkout" });
-  if (co.url) {
-    if (problems.length) console.warn("setup notes:", problems);
-    window.location.href = co.url;
-    return;
-  }
-  $("createBtn").disabled = false;
-  $("createBtn").textContent = "ADD CARD & START TRIAL";
-  teamReady = true;
-  msg(co.error || "Your team is created — one step left: add your card to start the trial. Tap the button to try again.", true);
-};
 </script>
 </body>
 </html>
