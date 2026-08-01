@@ -166,8 +166,13 @@ function esc(s) { const d = document.createElement("div"); d.textContent = s ?? 
 function render() {
   const { company, members, projects } = roster;
   $("billingBtn").textContent = company.stripe_subscription_id ? "MANAGE BILLING" : "START SUBSCRIPTION";
+  const trialExpired = company.status === "trialing" && company.trial_ends_at && new Date(company.trial_ends_at) < new Date();
   $("coName").innerHTML = esc(company.name) +
-    (company.status === "trialing" ? '<span class="trial">TRIAL — ENDS ' + new Date(company.trial_ends_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }).toUpperCase() + "</span>" : "");
+    (company.status === "trialing"
+      ? (trialExpired
+        ? '<span class="trial" style="border-color:var(--urgent);color:var(--urgent);">TRIAL ENDED</span>'
+        : '<span class="trial">TRIAL — ENDS ' + new Date(company.trial_ends_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }).toUpperCase() + "</span>")
+      : "");
   // Billing is derived: teammates are always seats; the admin's seat is
   // free until a job sits on it. The server computes it — we just show it.
   const billable = roster.billable_seats ?? company.seat_count ?? 0;
@@ -175,8 +180,12 @@ function render() {
   $("coSub").innerHTML = "<b>" + billable + "</b> billed seat" + (billable === 1 ? "" : "s") + " · $24.99 per seat / month" + (adminBilled ? "" : " · your seat is free until you take a job");
   $("seatSummary").textContent = billable === 0 ? "Free — nothing to bill yet" : billable + " seat" + (billable === 1 ? "" : "s") + " · $" + (billable * 24.99).toFixed(2) + "/mo";
   $("seatDetail").textContent = adminBilled ? "Includes your seat — a job is assigned to you." : "Teammates are billed; you're free until a job lands on your seat.";
-  if (billable > 0 && !company.stripe_subscription_id) {
-    $("seatDetail").textContent += " Add a card to keep the trial running — tap Start subscription.";
+  if (!company.stripe_subscription_id) {
+    if (trialExpired) {
+      $("seatDetail").textContent = "Your 30 free days are up — new logging is paused until billing starts. Everything already logged stays readable. Tap Start subscription.";
+    } else if (billable > 0) {
+      $("seatDetail").textContent += " Add a card to keep the trial running — tap Start subscription.";
+    }
   }
 
   const memberLabel = (m) => (m.is_admin ? "me" : m.email + (m.user_id ? "" : " (invited)"));
