@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting started with SiteLog AI — your first log in two minutes</title>
+<meta name="description" content="How to set up SiteLog AI: download the construction daily log app, sign in with your work email, and put your first log on the record in 30 seconds. Plus dashboard basics for team admins.">
+<link rel="canonical" href="https://sitelog-ai.com/start.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sitelog-ai.com/start.html">
+<meta property="og:title" content="Getting started with SiteLog AI">
+<meta property="og:description" content="Your first log in two minutes — setup for the crew, dashboard basics for the admin.">
+<meta property="og:image" content="https://sitelog-ai.com/og-card.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000000'/><rect x='18' y='44' width='8' height='16' rx='4' fill='%23C8E829'/><rect x='32' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='46' y='20' width='8' height='60' rx='4' fill='%23C8E829'/><rect x='60' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='74' y='44' width='8' height='16' rx='4' fill='%23C8E829'/></svg>">
+<style>
+  :root{
+    --paper:#FAF9F5;--card:#FFFFFF;--card2:#FCFBF8;--divider:#E7E4DC;
+    --yellow:#C8E829;--orange:#E87722;--urgent:#CC3B2A;--text:#17181C;--text2:#565B63;--maxw:860px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  nav{position:sticky;top:0;z-index:50;background:rgba(250,249,245,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--divider);}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .wordmark{font-weight:900;font-size:22px;letter-spacing:.5px;white-space:nowrap;}
+  .wordmark .ai{color:#6E7D00;}
+  .nav-back{font-size:15px;color:var(--text2);font-weight:600;}
+  .nav-back:hover{color:var(--text);}
+
+  .hero{padding:56px 0 8px;text-align:center;}
+  .eyebrow{display:inline-block;color:var(--orange);font-weight:800;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px;}
+  h1{font-size:clamp(30px,4.4vw,46px);line-height:1.1;font-weight:900;letter-spacing:-.8px;}
+  h1 .hl{color:#C25A0E;}
+  .hero p.sub{color:var(--text2);font-size:clamp(16px,2vw,18px);margin:18px auto 0;max-width:36em;}
+  .hero p.sub strong{color:var(--text);}
+
+  section{padding:36px 0 8px;}
+  h2.sec{font-size:clamp(22px,3vw,30px);font-weight:900;letter-spacing:-.4px;margin-bottom:6px;}
+  .sec-sub{color:var(--text2);font-size:15.5px;margin-bottom:22px;max-width:44em;}
+  .sec-sub strong{color:var(--text);}
+
+  .stepgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .step{background:var(--card);border:1px solid var(--divider);border-radius:18px;padding:24px 22px;}
+  .step .n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    background:var(--yellow);color:#111;font-weight:900;font-size:16px;margin-bottom:12px;}
+  .step h3{font-size:17px;font-weight:800;margin-bottom:6px;}
+  .step p{color:var(--text2);font-size:14.5px;}
+  .step p strong{color:var(--text);}
+  .step .chip{display:inline-block;background:#F2EFE8;border:1px solid var(--divider);border-radius:6px;padding:1px 7px;font-weight:600;color:var(--text);font-size:13.5px;}
+
+  .storebtn{display:inline-block;background:var(--yellow);color:#111;font-weight:800;font-size:15.5px;
+    padding:14px 26px;border-radius:12px;margin-top:18px;}
+  .storebtn:hover{filter:brightness(1.08);}
+
+  .firstlog{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center;margin-top:10px;}
+  .firstlog ol{padding-left:20px;line-height:1.9;font-size:15.5px;}
+  .firstlog li strong{color:var(--text);}
+  .firstlog li span{color:var(--text2);}
+  .phone{width:min(250px,74vw);margin:0 auto;background:#0B0B0B;border-radius:38px;padding:10px;border:1px solid #24262B;box-shadow:0 24px 70px rgba(20,22,28,.18);}
+  .phone-screen{border-radius:30px;overflow:hidden;aspect-ratio:381/828;}
+  .phone-screen img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .notebox{background:#F7F5EF;border:1px solid var(--divider);border-left:4px solid var(--orange);border-radius:12px;padding:16px 18px;margin:26px 0 6px;font-size:14.5px;color:#3A3D44;}
+  .notebox strong{color:var(--text);}
+
+  .adminlist{margin-top:6px;}
+  .arow{background:var(--card);border:1px solid var(--divider);border-radius:16px;padding:18px 20px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;}
+  .arow .tag{flex-shrink:0;background:#F2EFE8;border:1px solid var(--divider);color:#B85511;font-weight:800;font-size:11px;letter-spacing:1.2px;border-radius:999px;padding:5px 12px;margin-top:2px;white-space:nowrap;}
+  .arow p{font-size:14.5px;color:var(--text2);}
+  .arow p strong{color:var(--text);}
+
+  .faqmini{margin-top:4px;}
+  details{background:var(--card);border:1px solid var(--divider);border-radius:14px;padding:0 18px;margin-bottom:10px;}
+  summary{cursor:pointer;font-weight:700;font-size:15px;padding:15px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  summary::after{content:"+";color:var(--orange);font-size:19px;font-weight:400;}
+  details[open] summary::after{content:"–";}
+  details .a{color:var(--text2);font-size:14.5px;padding:0 0 15px;}
+  details .a strong{color:var(--text);}
+  details .a a{color:#C25A0E;}
+
+  .final{text-align:center;padding:40px 0 56px;}
+  .final p{color:var(--text2);font-size:15px;margin-top:10px;}
+  .final a.mail{color:#C25A0E;font-weight:700;}
+
+  footer{border-top:1px solid var(--divider);padding:28px 0;}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--text2);font-size:13.5px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a:hover{color:var(--text);}
+
+  @media (max-width:760px){
+    .stepgrid{grid-template-columns:1fr;}
+    .firstlog{grid-template-columns:1fr;gap:26px;}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <a class="wordmark" href="/">SITELOG <span class="ai">AI</span></a>
+  <a class="nav-back" href="/">← sitelog-ai.com</a>
+</div></nav>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Getting started</span>
+    <h1>Your first log, <span class="hl">two minutes from now.</span></h1>
+    <p class="sub">Everything you need to get going — whether the boss just added you to the team, or you're the one running it. <strong>No manual, no training day.</strong> This page is the whole thing.</p>
+  </div>
+</div>
+
+<!-- ================= FOR THE CREW ================= -->
+<section id="crew">
+  <div class="wrap">
+    <h2 class="sec">On the crew? Start here.</h2>
+    <p class="sec-sub">If you got an email saying your company added you to SiteLog AI, setup is three steps — and your jobs are already loaded when you're done.</p>
+
+    <div class="stepgrid">
+      <div class="step">
+        <span class="n">1</span>
+        <h3>Get the app</h3>
+        <p>Download <strong>SiteLog AI</strong> free from the Apple App Store. Your seat is already paid for by the company — <strong>you never enter a card.</strong></p>
+        <a class="storebtn" href="https://apps.apple.com/app/id6768819001">Get it on the App Store →</a>
+      </div>
+      <div class="step">
+        <span class="n">2</span>
+        <h3>Sign in with your work email</h3>
+        <p>Use <strong>the exact email your invite came to</strong> — that's how your jobs and seat connect. We email you a <span class="chip">6-digit code</span>, you type it in, done. No password to remember.</p>
+      </div>
+      <div class="step">
+        <span class="n">3</span>
+        <h3>Your jobs are waiting</h3>
+        <p>The jobs your admin assigned are <strong>already in the app</strong> the first time it opens. Nothing to set up, nothing to configure. Pick a job and log your first note.</p>
+      </div>
+    </div>
+
+    <div class="notebox">
+      <strong>Two emails to watch for:</strong> your 6-digit sign-in codes and your jobs' <strong>daily SiteLog reports</strong> both come by email. The first time, <strong>check spam or junk</strong> and mark SiteLog "not spam" — so the record always reaches you.
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIRST LOG ================= -->
+<section id="firstlog">
+  <div class="wrap">
+    <h2 class="sec">Your first log — 30 seconds.</h2>
+    <p class="sec-sub">SiteLog has one job: get what you're looking at <strong>on the record</strong> before you're out of the parking lot. Three buttons at the bottom of the screen: keyboard, mic, camera.</p>
+    <div class="firstlog">
+      <ol>
+        <li><strong>Snap it.</strong> <span>Tap the camera and shoot the work — up to five photos on one log.</span></li>
+        <li><strong>Talk it.</strong> <span>Tap the mic and say what's important. Your words appear on screen as you speak, spelled right — rebar, CMU, GFCI, RFIs.</span></li>
+        <li><strong>Tap DONE, pick a category.</strong> <span>URGENT, TASK, RFI, or RECORD — one tap files it with the date, time, and photos, for the life of the job.</span></li>
+        <li><strong>That's the whole job.</strong> <span>Every night, the day's logs are sealed into a daily report automatically. You never build a report at 7pm again.</span></li>
+      </ol>
+      <div class="phone">
+        <div class="phone-screen">
+          <img src="screenshots/cap-record.png" alt="A finished SiteLog AI field note — voice-transcribed text with a jobsite photo attached, ready to file">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOR THE ADMIN ================= -->
+<section id="admin">
+  <div class="wrap">
+    <h2 class="sec">Running the team? Here's your dashboard.</h2>
+    <p class="sec-sub">Everything you manage lives at <a href="dashboard.html" style="color:#C25A0E;font-weight:700;">sitelog-ai.com/dashboard</a> — sign in with your admin email anytime. Four things you'll actually do:</p>
+
+    <div class="adminlist">
+      <div class="arow">
+        <span class="tag">ADD A JOB</span>
+        <p>Type the job name and address, pick who runs it, tap <strong>ADD JOB</strong>. The job lands in that person's app automatically — even if they haven't signed in yet, it's waiting on their first open.</p>
+      </div>
+      <div class="arow">
+        <span class="tag">INVITE CREW</span>
+        <p>Enter a work email and tap <strong>INVITE</strong>. We email them the App Store link and sign-in steps — you don't explain anything. <strong>Each teammate you add is a $24.99/mo seat</strong> (prorated automatically); your own seat is free until you put a job on it.</p>
+      </div>
+      <div class="arow">
+        <span class="tag">REASSIGN</span>
+        <p>Super leaves, new one starts? Change the name on the job in one tap. <strong>Every log stays with the job</strong> — the record belongs to the company, and the full history is there for whoever takes over.</p>
+      </div>
+      <div class="arow">
+        <span class="tag">BILLING</span>
+        <p><strong>Manage billing</strong> opens your Stripe portal — card, invoices, receipts, cancel. Seats count themselves; you'll never do seat math. 30 days free, then billing starts on the card you added.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MINI FAQ ================= -->
+<section id="startfaq">
+  <div class="wrap">
+    <h2 class="sec">Quick answers</h2>
+    <div class="faqmini" style="margin-top:18px;">
+      <details>
+        <summary>I didn't get my sign-in code or invite email.</summary>
+        <div class="a">Check <strong>spam or junk</strong> first — then mark it "not spam" so the next one lands. Still nothing after a minute or two? Make sure you're using the exact email your admin invited (ask them to check the dashboard), or write us at <a href="mailto:support@sitelog-ai.com">support@sitelog-ai.com</a>.</div>
+      </details>
+      <details>
+        <summary>No signal at the jobsite — does it still work?</summary>
+        <div class="a">Yes. <strong>Logs save on your phone and sync when you're back in coverage.</strong> Capture doesn't wait for bars.</div>
+      </details>
+      <details>
+        <summary>Where do the daily reports go?</summary>
+        <div class="a">Every night, the day's logs are sealed into a dated daily report and emailed to the address set on the job. You can also send any slice on demand — today, the week, the whole job — as a PDF from the Reports screen.</div>
+      </details>
+      <details>
+        <summary>Can I fix a log after it's filed?</summary>
+        <div class="a">Filed logs <strong>can't be edited — by design.</strong> That's what makes the record carry weight with owners, insurers, and lawyers. File a correction as a new log, same as paper daily logs handled it for a hundred years.</div>
+      </details>
+      <details>
+        <summary>I'm solo — no team, no admin.</summary>
+        <div class="a">Grab the individual plan straight from the <a href="https://apps.apple.com/app/id6768819001">App Store</a> — 14-day free trial, $29.99/mo, billed by Apple. Same app, your own record.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="final">
+  <div class="wrap">
+    <a class="storebtn" href="https://apps.apple.com/app/id6768819001">Get SiteLog AI on the App Store →</a>
+    <p>Stuck on anything? <a class="mail" href="mailto:support@sitelog-ai.com">support@sitelog-ai.com</a> — a person reads it.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span class="wordmark" style="font-size:17px;">SITELOG <span class="ai">AI</span></span>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="teams.html">Teams</a>
+      <a href="dashboard.html">Team dashboard</a>
+      <a href="faq.html">FAQ</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <span>© 2026 Block Management Services LLC</span>
+  </div>
+</footer>
+
+</body>
+</html>
