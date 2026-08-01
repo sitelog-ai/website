@@ -3,14 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SiteLog AI for Teams — The record belongs to the job, not the phone.</title>
-<meta name="description" content="Per-seat SiteLog AI team accounts for construction businesses. Every jobsite's logs stay with the company and handoffs take one tap. $24.99 per person per month — build your crew in one minute, 30 days free.">
+<title>SiteLog AI for Teams — the construction daily log app for the whole crew</title>
+<meta name="description" content="Per-seat team accounts for the construction daily log app supers actually use. Every jobsite's logs stay with the company, handoffs take one tap, and the record is ready when a claim shows up. $24.99 per seat per month — build your crew in one minute, 30 days free.">
 <link rel="canonical" href="https://sitelog-ai.com/teams.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Who can see whose logs on a team account?", "acceptedAnswer": { "@type": "Answer", "text": "On a team account the logs belong to the company. The admin assigns each job to a super, and each job keeps its own logs, daily records, and Vault, so one job's history never bleeds into another's." } },
+    { "@type": "Question", "name": "What happens to our record if we cancel?", "acceptedAnswer": { "@type": "Answer", "text": "Your record stays readable and exportable. Every report is emailed to you as a PDF, so the history lives in your own inbox. Cancel anytime from the dashboard; service runs to the end of the paid period." } },
+    { "@type": "Question", "name": "How do seats change mid-month?", "acceptedAnswer": { "@type": "Answer", "text": "Change the seat count anytime from the dashboard. Increases and decreases are prorated automatically by Stripe. There is a 2-seat minimum." } },
+    { "@type": "Question", "name": "Can a log be edited or deleted after it is filed?", "acceptedAnswer": { "@type": "Answer", "text": "No, by design. Once a log is filed it cannot be altered, and each day is sealed overnight into a tamper-evident daily record. Corrections are filed as a new log." } },
+    { "@type": "Question", "name": "Who owns the data, and is it secure?", "acceptedAnswer": { "@type": "Answer", "text": "On a team account, logs captured under company jobsites belong to the company. Data is encrypted in transit, access is limited to the authenticated account, and content is never sold or used to train AI models." } },
+    { "@type": "Question", "name": "What does the crew have to do to get started?", "acceptedAnswer": { "@type": "Answer", "text": "They download SiteLog AI free from the Apple App Store and sign in with their work email. Their assigned jobs are already waiting and their seat is covered, so nobody on the crew enters a card." } }
+  ]
+}
+</script>
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sitelog-ai.com/teams.html">
 <meta property="og:title" content="SiteLog AI for Teams">
-<meta property="og:description" content="The record belongs to the job — not the phone. Build your crew in one minute — 30 days free.">
-<meta property="og:image" content="https://sitelog-ai.com/screenshots/s10.png">
+<meta property="og:description" content="The record belongs to the job — not the phone. The construction daily log app built for teams — build your crew in one minute, 30 days free.">
+<meta property="og:image" content="https://sitelog-ai.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000000'/><rect x='18' y='44' width='8' height='16' rx='4' fill='%23C8E829'/><rect x='32' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='46' y='20' width='8' height='60' rx='4' fill='%23C8E829'/><rect x='60' y='32' width='8' height='40' rx='4' fill='%23C8E829'/><rect x='74' y='44' width='8' height='16' rx='4' fill='%23C8E829'/></svg>">
 <style>
   :root{
@@ -98,6 +115,73 @@
   .foot-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--text2);font-size:14px;}
   .foot-links{display:flex;gap:24px;}
   .foot-links a:hover{color:var(--text);}
+  /* section headers */
+  .sec-head{max-width:720px;margin:0 auto 40px;text-align:center;}
+  .sec-head .eyebrow{margin-bottom:12px;}
+  .sec-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;letter-spacing:-.5px;line-height:1.15;}
+  .sec-head p{color:var(--text2);font-size:17px;margin-top:12px;}
+  .sec-head p strong{color:var(--text);}
+  .band{background:#F2EFE8;border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);}
+
+  /* founder signed statement */
+  .founder{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--divider);
+    border-left:4px solid var(--orange);border-radius:16px;padding:34px 36px;box-shadow:0 12px 34px rgba(20,22,28,.06);}
+  .founder .fq{font-size:clamp(17px,2.1vw,20px);line-height:1.6;color:var(--text);}
+  .founder .fq strong{font-weight:800;}
+  .founder .frule{height:2px;width:54px;background:var(--orange);margin:24px 0 16px;border-radius:2px;}
+  .founder .fsig{font-size:20px;font-weight:900;letter-spacing:-.3px;}
+  .founder .fcred{color:var(--text2);font-size:13.5px;font-weight:600;margin-top:3px;letter-spacing:.2px;}
+  @media(max-width:600px){.founder{padding:26px 22px;}}
+
+  /* ROI cards */
+  .roi{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .roi-card{background:var(--card);border:1px solid var(--divider);border-radius:20px;padding:30px 28px;}
+  .roi-card .big{font-size:clamp(30px,4vw,42px);font-weight:900;letter-spacing:-1px;color:#C25A0E;line-height:1;}
+  .roi-card h3{font-size:19px;font-weight:800;margin:14px 0 8px;}
+  .roi-card p{color:var(--text2);font-size:15.5px;}
+  .roi-card p strong{color:var(--text);}
+  @media(max-width:760px){.roi{grid-template-columns:1fr;}}
+
+  /* dashboard browser-chrome mockup */
+  .browser{max-width:860px;margin:0 auto;background:var(--card);border:1px solid var(--divider);
+    border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(20,22,28,.14);}
+  .b-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#F2EFE8;border-bottom:1px solid var(--divider);}
+  .b-dot{width:11px;height:11px;border-radius:50%;background:#D6D2C8;}
+  .b-url{margin-left:10px;background:#fff;border:1px solid var(--divider);border-radius:7px;
+    padding:5px 12px;font-size:12px;color:var(--text2);font-weight:600;}
+  .b-body{padding:26px 28px;}
+  .dh-title{font-size:22px;font-weight:900;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .dh-trial{border:1.5px solid var(--record);color:#4A7A4A;font-size:11px;font-weight:800;letter-spacing:1px;
+    border-radius:999px;padding:4px 12px;}
+  .dh-sub{color:var(--text2);font-size:13.5px;margin:6px 0 22px;}
+  .dh-sub b{color:var(--text);}
+  .dcard{border:1px solid var(--divider);border-radius:14px;padding:18px 20px;margin-bottom:16px;background:#FCFBF8;}
+  .dcard h4{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--text2);margin-bottom:12px;}
+  .drow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--divider);}
+  .drow:first-of-type{border-top:none;}
+  .drow .who b{display:block;font-size:14.5px;}
+  .drow .who span{color:var(--text2);font-size:12px;}
+  .dpill{font-size:10.5px;font-weight:800;letter-spacing:.8px;border-radius:999px;padding:4px 11px;white-space:nowrap;}
+  .dpill.on{border:1.5px solid var(--record);color:#4A7A4A;}
+  .dpill.inv{border:1.5px solid #B08400;color:#8A6600;}
+  .dsel{background:#fff;border:1px solid var(--divider);border-radius:9px;padding:7px 12px;font-size:13px;color:var(--text);font-weight:600;}
+  .dseat{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .dseat .box{background:#fff;border:1px solid var(--divider);border-radius:9px;padding:9px 16px;font-size:15px;font-weight:700;}
+  .dbtn{background:var(--yellow);color:#111;font-weight:800;font-size:12.5px;border-radius:9px;padding:9px 15px;}
+  .dbtn.ghost{background:none;border:1px solid var(--divider);color:var(--text2);}
+  .dhint{color:var(--text2);font-size:12.5px;margin-top:12px;line-height:1.5;}
+
+  /* owner FAQ */
+  .ofaq{max-width:820px;margin:0 auto;}
+  .ofaq details{background:var(--card);border:1px solid var(--divider);border-radius:14px;margin-bottom:12px;padding:0 22px;}
+  .ofaq summary{list-style:none;cursor:pointer;padding:20px 0;font-size:17px;font-weight:700;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;}
+  .ofaq summary::-webkit-details-marker{display:none;}
+  .ofaq summary::after{content:"+";color:#C25A0E;font-weight:900;font-size:22px;flex-shrink:0;}
+  .ofaq details[open] summary::after{content:"–";}
+  .ofaq .a{padding:0 0 22px;color:var(--text2);font-size:15.5px;line-height:1.6;}
+  .ofaq .a strong{color:var(--text);}
+
   @media(max-width:860px){.grid{grid-template-columns:1fr;}}
   @media(max-width:600px){
     .hero{padding:52px 0 32px;}
@@ -130,7 +214,27 @@
   </div>
 </header>
 
+<!-- FOUNDER -->
+<section class="band" style="padding:44px 0;">
+  <div class="wrap">
+    <div class="founder">
+      <p class="fq">I've run luxury residential jobs for thirty years — South Florida, Napa, Sonoma. The whole time, the same thing kept costing good builders money: the job's record lived in one super's head and one super's phone, and the day he left, <strong>it walked out the door with him.</strong> Then a back-charge or a delay claim shows up a year later and nobody can prove what happened. I built SiteLog AI so the record belongs to the company, gets written in thirty seconds by whoever's standing there, and is still here long after any one person moves on. It's the tool I wish I'd had on every job I ever ran.</p>
+      <div class="frule"></div>
+      <div class="fsig">Louis Armanini</div>
+      <div class="fcred">Founder, SiteLog AI · Florida Certified Building Contractor · 30 years in the field</div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNERSHIP / HANDOFF / CONSISTENCY -->
 <section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Why a team account</span>
+      <h2>Software the crew won't fight you on — and a record you actually own.</h2>
+      <p>Your biggest risk isn't the price. It's buying a tool the field ignores, or a record you can't get to when a claim lands. A team account fixes both.</p>
+    </div>
+  </div>
   <div class="wrap grid">
     <div class="card">
       <h3><span class="n">01</span>The company owns the record</h3>
@@ -143,6 +247,128 @@
     <div class="card">
       <h3><span class="n">03</span>One tool, whole crew</h3>
       <p>Everyone logs the same way — snap, talk, done — so the record reads the same across every job and every hand. <strong>Thirty seconds to learn.</strong> No training budget required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ADOPTION PROOF -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Will my crew actually use it?</span>
+      <h2>Thirty seconds, one hand, no training.</h2>
+      <p>Field tools fail on friction. This one has none — if your guys can send a text, they already know how to use it.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Snap, talk, or type</h3>
+        <p>Tap once, say what happened, and it's transcribed — construction words spelled right. Or snap up to 5 photos, or type it. <strong>Whichever's fastest with gloves on.</strong></p>
+      </div>
+      <div class="card">
+        <h3>One tap to file it</h3>
+        <p>Urgent, Task, RFI, or Record — one tap and it's on the record, timestamped to the job. <strong>No forms, no fields, no menus to learn.</strong></p>
+      </div>
+      <div class="card">
+        <h3>Works where the job is</h3>
+        <p>Bright sun, work gloves, no signal, basement pour. Logs save offline and sync when coverage returns. <strong>The app worries about the connection, not your super.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The math for the office</span>
+      <h2>One record you needed pays for the crew for years.</h2>
+    </div>
+    <div class="roi">
+      <div class="roi-card">
+        <div class="big">One back-charge</div>
+        <h3>defended, not eaten</h3>
+        <p>One disputed back-charge or one documented delay day is worth more than <strong>years of your whole crew's seats.</strong> The record that wins it costs $24.99 a head, a month — and you only need it to matter once.</p>
+      </div>
+      <div class="roi-card">
+        <div class="big">1 hour a day</div>
+        <h3>off every super's desk</h3>
+        <p>A super writing the day's report by hand is an hour of loaded labor gone every evening. The daily Record writes itself. At <strong>$24.99 a seat</strong>, a month, you buy that hour back for a fraction of what it costs you now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD MOCKUP -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The admin side</span>
+      <h2>Run the whole crew from one screen.</h2>
+      <p>Add your people, assign each one their jobs, and manage seats. Assigned jobs are waiting in a super's app the first time he signs in — nothing for the field to set up.</p>
+    </div>
+    <div class="browser">
+      <div class="b-bar"><span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span><span class="b-url">sitelog-ai.com/dashboard</span></div>
+      <div class="b-body">
+        <div class="dh-title">Armanini Builders <span class="dh-trial">TRIAL — ENDS SEP 1</span></div>
+        <div class="dh-sub"><b>3</b> of <b>5</b> seats in use · $24.99 per seat / month</div>
+
+        <div class="dcard">
+          <h4>JOBS</h4>
+          <div class="drow"><div class="who"><b>Tower Condos</b><span>210 Tower Way, Clearwater FL</span></div><span class="dsel">Mike R. ▾</span></div>
+          <div class="drow"><div class="who"><b>Harborview Reno</b><span>88 Bayshore Dr, Sarasota FL</span></div><span class="dsel">me ▾</span></div>
+          <div class="drow"><div class="who"><b>Lane Residence</b><span>113 11th Ave N, St. Petersburg FL</span></div><span class="dsel">tom@… (invited) ▾</span></div>
+          <div class="dhint">Reassigning a job moves nothing — every log stays with the job. Only the name on the door changes.</div>
+        </div>
+
+        <div class="dcard">
+          <h4>PEOPLE</h4>
+          <div class="drow"><div class="who"><b>lou@armaninibuilders.com</b><span>signed in · admin</span></div><span class="dpill on">ON THE JOB</span></div>
+          <div class="drow"><div class="who"><b>mike@armaninibuilders.com</b><span>signed in</span></div><span class="dpill on">ON THE JOB</span></div>
+          <div class="drow"><div class="who"><b>tom@armaninibuilders.com</b><span>waiting for first sign-in</span></div><span class="dpill inv">INVITED</span></div>
+        </div>
+
+        <div class="dcard" style="margin-bottom:0;">
+          <h4>SEATS &amp; BILLING</h4>
+          <div class="dseat"><span class="box">5</span><span class="dbtn">UPDATE SEATS</span><span class="dbtn ghost" style="margin-left:auto;">MANAGE BILLING</span></div>
+          <div class="dhint">$24.99 per seat per month. Seat changes prorate automatically. Card, invoices, and receipts live in Manage billing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNER FAQ -->
+<section id="owner-faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Owner questions</span>
+      <h2>The things an owner asks before signing off.</h2>
+    </div>
+    <div class="ofaq">
+      <details>
+        <summary>Who can see whose logs?</summary>
+        <div class="a">On a team account the logs belong to the <strong>company</strong>. As admin you assign each job to a super, and each job keeps its own logs, its own daily records, and its own Vault — so one job's history never bleeds into another's. You control who's on the account and which jobs they run.</div>
+      </details>
+      <details>
+        <summary>What happens to our record if we cancel?</summary>
+        <div class="a">Your record stays readable and exportable — every report is emailed to you as a PDF for exactly this reason, so the history lives in your own inbox, not locked in ours. <strong>We will never hold your record hostage.</strong> Cancel anytime from the dashboard's Manage billing; service runs to the end of the period you've paid for.</div>
+      </details>
+      <details>
+        <summary>How do seats change mid-month?</summary>
+        <div class="a">Change the seat count anytime from the dashboard. Increases and decreases are <strong>prorated automatically by Stripe</strong> — add a super in the middle of a job and you're only billed for the days you use. There's a 2-seat minimum.</div>
+      </details>
+      <details>
+        <summary>Can a super quietly edit or delete a log?</summary>
+        <div class="a">No — <strong>by design</strong>. Once a log is filed it can't be altered, and each day is sealed overnight into a tamper-evident daily record. That's what makes the record carry weight with owners, architects, insurers, and lawyers. A correction is filed as a new log, exactly how paper daily logs handled it for a hundred years.</div>
+      </details>
+      <details>
+        <summary>Who owns the data, and is it secure?</summary>
+        <div class="a">On a team account, logs captured under company jobsites <strong>belong to the company</strong>. Data is encrypted in transit, access is limited to your authenticated account, and we <strong>never sell your data or use your content to train AI models</strong>. Full detail is in our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms</a>.</div>
+      </details>
+      <details>
+        <summary>What does my crew have to do to get started?</summary>
+        <div class="a">Almost nothing. They download SiteLog AI free from the Apple App Store and sign in with their work email — <strong>their assigned jobs are already waiting</strong>, and their seat is covered, so nobody on your crew ever enters a card. That's the whole setup.</div>
+      </details>
     </div>
   </div>
 </section>
