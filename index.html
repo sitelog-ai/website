@@ -590,18 +590,6 @@
   .founder .fcred{color:var(--text2);font-size:13.5px;font-weight:600;margin-top:3px;}
   @media(max-width:600px){.founder{padding:26px 22px;}}
 
-  /* waitlist capture (individual pricing card) */
-  .wait-cap{margin-top:22px;}
-  .wait-head{font-size:13.5px;color:var(--text2);margin-bottom:12px;line-height:1.5;}
-  .wait-form{display:flex;gap:8px;flex-wrap:wrap;}
-  .wait-form input{flex:1;min-width:150px;background:#fff;border:1px solid var(--divider);
-    border-radius:12px;color:var(--text);font-size:15px;padding:13px 14px;outline:none;}
-  .wait-form input:focus{border-color:#E87722;}
-  .wait-form .btn-ghost{padding:13px 20px;font-size:15px;white-space:nowrap;cursor:pointer;background:none;}
-  .wait-msg{font-size:12.5px;color:var(--text2);margin-top:12px;line-height:1.5;}
-  .wait-msg.ok{color:#3B6D11;font-weight:600;}
-  .wait-msg.err{color:var(--urgent);font-weight:600;}
-
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
   .reveal.in{opacity:1;transform:none;}
   @media(prefers-reduced-motion:reduce){
@@ -650,12 +638,12 @@
         <a class="btn-primary" href="teams.html#signup">Start your team — 30 days free</a>
         <a class="btn-ghost" href="#how">See how it works</a>
       </div>
-      <p class="hero-note"><strong>$24.99 per seat / month.</strong> 30-day free trial · cancel anytime · 2-seat minimum. Solo? <a href="#pricing" style="color:#C25A0E;font-weight:700;">Get notified when the app launches ↓</a></p>
+      <p class="hero-note"><strong>$24.99 per seat / month.</strong> 30-day free trial · cancel anytime · 2-seat minimum. Working solo? <a href="#pricing" style="color:#C25A0E;font-weight:700;">Get the app on the App Store ↓</a></p>
     </div>
     <div class="f-visual">
       <div class="phone">
         <div class="phone-screen">
-          <img class="shot" src="screenshots/s10.png" alt="SiteLog AI capture screen — three buttons: keyboard, microphone, camera">
+          <img class="shot" src="screenshots/hero-shoot.png" alt="A full-size jobsite photo captured in SiteLog AI — red fire-main lines, copper runs, and overhead ductwork above a corridor rough-in">
         </div>
       </div>
     </div>
@@ -751,7 +739,7 @@
       <div class="f-visual reveal">
         <div class="phone">
           <div class="phone-screen">
-            <img class="shot" src="screenshots/s02.png" alt="A captured field note in SiteLog AI, ready to sort" loading="lazy">
+            <img class="shot" src="screenshots/log-firemain.png" alt="The spoken field note for that photo, transcribed in SiteLog AI — 'Overhead rough-in above the corridor: fire main tee and branch lines set, copper runs strapped, cable tray and supply duct hung clear of the beam' — with the same red fire-main and ductwork photo attached" loading="lazy">
           </div>
         </div>
       </div>
@@ -1006,7 +994,7 @@
       <div class="receipt reveal"><div class="n">4 colors</div><div class="l">Urgent, Task, RFI, Record — the entire filing system</div></div>
       <div class="receipt reveal"><div class="n">3 jobs</div><div class="l">separate jobsites, each with its own record and reports</div></div>
       <div class="receipt reveal"><div class="n">0 bars</div><div class="l">needed — logs capture offline and sync when coverage returns</div></div>
-      <div class="receipt reveal"><div class="n">$24.99</div><div class="l">a seat / month for teams · 30-day free trial · individual plan coming to the App Store</div></div>
+      <div class="receipt reveal"><div class="n">$24.99</div><div class="l">a seat / month for teams · 30-day free trial · individual plan on the App Store</div></div>
     </div>
   </div>
 </section>
@@ -1040,7 +1028,7 @@
       <div class="pcard">
         <div class="plan">Individual</div>
         <div class="pnum">$29.99<span>/ month</span></div>
-        <p class="psub">14 days free · cancel anytime</p>
+        <p class="psub">On the App Store · 14-day free trial · cancel anytime</p>
         <ul class="price-feats">
           <li>Unlimited logs — voice, photo &amp; keyboard</li>
           <li>Live transcription tuned for construction</li>
@@ -1050,14 +1038,8 @@
           <li>The daily Record — kept for the life of the job</li>
           <li>3 jobsites, offline capture</li>
         </ul>
-        <div class="wait-cap">
-          <div class="wait-head">Coming to the App Store — $29.99/mo, 14-day free trial, billed by Apple.</div>
-          <form class="wait-form" id="waitForm" novalidate>
-            <input type="email" id="waitEmail" placeholder="you@email.com" aria-label="Your email" autocomplete="email">
-            <button type="submit" class="btn-ghost" id="waitBtn">Notify me</button>
-          </form>
-          <p class="wait-msg" id="waitMsg">Get notified the day it hits the App Store. One email, then nothing until launch.</p>
-        </div>
+        <a class="btn-ghost" href="https://apps.apple.com/app/id6768819001" style="display:block;text-align:center;">Get it on the App Store →</a>
+        <p class="price-note">14-day free trial, then $29.99/month billed by Apple. Cancel anytime in your Apple account.</p>
       </div>
 
     </div>
@@ -1088,36 +1070,6 @@
   </div>
 </footer>
 </div><!-- /lightzone -->
-
-<script>
-  /* ===== App Store launch waitlist — inserts to Supabase (insert-only RLS) ===== */
-  (function () {
-    var SB = "https://smogomdqivzomyggxlur.supabase.co/rest/v1/waitlist";
-    var KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtb2dvbWRxaXZ6b215Z2d4bHVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTA0NjQsImV4cCI6MjA4OTE2NjQ2NH0.Fy0d3fNTYn5ziSKXie6-dApmHN3DUwx5KsunYWXgaao";
-    var form = document.getElementById("waitForm");
-    if (!form) return;
-    var input = document.getElementById("waitEmail");
-    var btn = document.getElementById("waitBtn");
-    var msg = document.getElementById("waitMsg");
-    function say(t, cls) { msg.textContent = t; msg.className = "wait-msg" + (cls ? " " + cls : ""); }
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var email = (input.value || "").trim().toLowerCase();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say("Enter a valid email address.", "err"); return; }
-      btn.disabled = true; say("Adding you…");
-      fetch(SB, {
-        method: "POST",
-        headers: { "apikey": KEY, "Authorization": "Bearer " + KEY, "Content-Type": "application/json", "Prefer": "return=minimal" },
-        body: JSON.stringify({ email: email, source: "homepage" })
-      }).then(function (r) {
-        btn.disabled = false;
-        if (r.status === 201 || r.status === 204) { form.style.display = "none"; say("You're on the list. We'll email you the day it hits the App Store.", "ok"); }
-        else if (r.status === 409) { form.style.display = "none"; say("You're already on the list — we'll email you at launch.", "ok"); }
-        else { say("Couldn't add you just now. Try again, or email support@sitelog-ai.com.", "err"); }
-      }).catch(function () { btn.disabled = false; say("Network hiccup. Try again in a moment.", "err"); });
-    });
-  })();
-</script>
 
 <script>
   const io = new IntersectionObserver((entries)=>{
