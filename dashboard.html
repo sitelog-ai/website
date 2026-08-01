@@ -117,7 +117,7 @@
       <input id="mEmail" type="email" placeholder="super@company.com">
       <button class="btn" id="mInvite">INVITE</button>
     </div>
-    <div class="hint">Tell them: download SiteLog AI from the App Store and sign in with this email. That's the whole setup.</div>
+    <div class="hint">The moment you invite someone, we email them a download link and sign-in steps. Their jobs and seat are already waiting — that's the whole setup.</div>
   </div>
 
   <div class="card">
@@ -254,7 +254,7 @@ $("pAdd").onclick = async () => {
 $("mInvite").onclick = async () => {
   const out = await call({ action: "invite", email: $("mEmail").value });
   if (out.error) return say(out.error, true);
-  $("mEmail").value = ""; say("Invited — tell them to download SiteLog AI and sign in with that email."); refresh();
+  $("mEmail").value = ""; say(out.emailed === false ? "Invited — heads up, we couldn't email them, so tell them to download SiteLog AI and sign in with that email." : "Invited — we emailed them a download link and sign-in steps."); refresh();
 };
 $("billingBtn").onclick = async () => {
   const hasSub = roster && roster.company && roster.company.stripe_subscription_id;
