@@ -20,7 +20,7 @@
   nav{position:sticky;top:0;z-index:50;background:rgba(250,249,245,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--divider);}
   .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
   .wordmark{font-weight:900;font-size:22px;letter-spacing:.5px;}
-  .wordmark .ai{color:#6E7D00;}
+  .wordmark .ai{color:#657200;}
   .signout{color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;}
   .signout:hover{color:var(--text);}
   h1{font-size:26px;font-weight:900;margin:36px 0 4px;}
@@ -77,7 +77,7 @@
     font-size:16px;padding:13px 14px;outline:none;}
   .gate .btn{width:100%;font-size:15px;padding:14px;margin-top:20px;}
   .hidden{display:none;}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #B85511;outline-offset:2px;}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #A34A0B;outline-offset:2px;}
 .skip{position:absolute;left:-9999px;top:0;background:#17181C;color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:100;font-weight:700;}
 .skip:focus{left:0;}
 </style>
@@ -282,10 +282,10 @@ async function refresh() {
   }
   if (out.error) {
     if (out.network) {
-      $("msg").innerHTML = 'Couldn\'t reach the server. <a href="#" id="retryBtn" style="color:#B85511;text-decoration:underline;font-weight:700;">Try again</a>';
+      $("msg").innerHTML = 'Couldn\'t reach the server. <a href="#" id="retryBtn" style="color:#A34A0B;text-decoration:underline;font-weight:700;">Try again</a>';
       $("msg").className = "msg err";
     } else {
-      $("msg").innerHTML = 'This account isn\'t set up as a team admin yet. <a href="teams.html#signup" style="color:#B85511;text-decoration:underline;font-weight:700;">Start your team</a> — it takes one minute. (Crew members use the app, not this dashboard.)';
+      $("msg").innerHTML = 'This account isn\'t set up as a team admin yet. <a href="teams.html#signup" style="color:#A34A0B;text-decoration:underline;font-weight:700;">Start your team</a> — it takes one minute. (Crew members use the app, not this dashboard.)';
       $("msg").className = "msg err";
     }
     const rb = document.getElementById("retryBtn");
@@ -314,7 +314,7 @@ $("gSend").onclick = async () => {
   $("gSend").disabled = false;
   if (error) {
     if (/signups not allowed/i.test(error.message)) {
-      $("gMsg").innerHTML = 'No SiteLog account with that email yet. <a href="teams.html" style="color:#B85511;text-decoration:underline;">Start your team here</a> — it takes one minute.';
+      $("gMsg").innerHTML = 'No SiteLog account with that email yet. <a href="teams.html" style="color:#A34A0B;text-decoration:underline;">Start your team here</a> — it takes one minute.';
       $("gMsg").className = "msg";
       return;
     }
