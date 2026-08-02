@@ -211,6 +211,15 @@
   .phone-screen img.shot{
     width:100%;height:100%;object-fit:cover;object-position:center;display:block;
   }
+  /* zoomed-log callout — a readable blow-up of the actual card in the shot */
+  .zoomwrap{position:relative;width:fit-content;margin:0 auto;}
+  .zoomcall{position:absolute;right:-17%;bottom:9%;width:124%;text-align:left;}
+  .zoomcall img{width:100%;display:block;border-radius:14px;border:2.5px solid var(--yellow);
+    box-shadow:0 22px 55px rgba(20,22,28,.38);}
+  .ztag{display:inline-block;background:var(--yellow);color:#111;font-weight:800;font-size:11px;
+    letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:999px;
+    margin-bottom:8px;box-shadow:0 6px 16px rgba(20,22,28,.18);}
+  @media(max-width:900px){ .zoomcall{right:-6%;width:112%;} }
 
   /* ============ SECTIONS ============ */
   section{padding:88px 0;}
@@ -822,9 +831,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
         </ul>
       </div>
       <div class="f-visual reveal">
-        <div class="phone">
-          <div class="phone-screen">
-            <img class="shot" src="screenshots/cap-search.png" alt="SiteLog AI Vault returning the matching logs for a question — an urgent water-intrusion note and its resolution, both dated two years back, found in seconds" loading="lazy">
+        <div class="zoomwrap">
+          <div class="phone">
+            <div class="phone-screen">
+              <img class="shot" src="screenshots/cap-search.png" alt="SiteLog AI Vault returning the matching logs for a question — an urgent water-intrusion note and its resolution, both dated two years back, found in seconds" loading="lazy">
+            </div>
+          </div>
+          <div class="zoomcall">
+            <span class="ztag">Zoomed in — the actual log</span>
+            <img src="screenshots/zoom-log.png" alt="The urgent log card enlarged to reading size: 'Water intrusion at the northeast stairwell — plumber called, temporary containment in place. 4 photos attached.'" loading="lazy">
           </div>
         </div>
       </div>
@@ -848,9 +863,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
         </div>
       </div>
       <div class="f-visual reveal">
-        <div class="phone">
-          <div class="phone-screen">
-            <img class="shot" src="screenshots/cap-send.png" alt="SiteLog AI Vault with a log selected and a Share / Text and Email Report bar ready to send it — one log, four photos included" loading="lazy">
+        <div class="zoomwrap">
+          <div class="phone">
+            <div class="phone-screen">
+              <img class="shot" src="screenshots/cap-send.png" alt="SiteLog AI Vault with a log selected and a Share / Text and Email Report bar ready to send it — one log, four photos included" loading="lazy">
+            </div>
+          </div>
+          <div class="zoomcall">
+            <span class="ztag">Zoomed in — the actual log</span>
+            <img src="screenshots/zoom-log2.png" alt="A record log card enlarged to reading size: 'Plumber replaced the weeping fitting at the northeast stairwell riser. Second pressure test held at 100 psi for thirty minutes — leak resolved, drywall hold released.'" loading="lazy">
           </div>
         </div>
       </div>
