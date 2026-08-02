@@ -385,7 +385,7 @@
     <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
     <button class="btn" id="startBtn">CONTINUE</button>
     <div class="fineprint"><strong style="color:var(--text);">You become the account admin.</strong> We email you a 6-digit code to verify — no password to remember.</div>
-    <div class="fineprint">By continuing you agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. Creating a team is free — <strong>$24.99/mo per teammate</strong> once you add your crew (30 days free, card required then). Your own seat is free until you put a job on it.</div>
+    <div class="fineprint">By continuing you agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. <strong>A card is required at signup — $0 today.</strong> Your first 30 days are free and you can cancel anytime. After the trial it's <strong>$24.99/mo per teammate</strong>; your own seat is free until you put a job on it.</div>
     <div class="fineprint">Already have a team? <a href="dashboard.html">Sign in to your dashboard →</a></div>
   </div>
 
@@ -399,7 +399,7 @@
 
   <div id="step3" class="hidden">
     <h2>You're in.</h2>
-    <div class="note">Taking you to your team dashboard — add your jobs and crew there.</div>
+    <div class="note">One quick step: put your card on file — <strong>$0 today</strong> — then your dashboard opens. You add jobs and crew there.</div>
   </div>
 
   <div class="msg" id="msg"></div>
@@ -461,7 +461,14 @@ $("verifyBtn").onclick = async () => {
     $("verifyBtn").disabled = false;
     return msg(created.error, true);
   }
-  $("step2").classList.add("hidden"); $("step3").classList.remove("hidden"); msg("");
+  $("step2").classList.add("hidden"); $("step3").classList.remove("hidden");
+  // Card goes on file NOW — $0 today — so the crew never hits a payment
+  // wall later. Stripe's $0 setup page, then straight to the dashboard.
+  msg("One last step: securing your card on file — $0 today…");
+  const card = await call({ action: "setup_card" });
+  if (card.url) { window.location.href = card.url; return; }
+  // If the card page couldn't open, land in the dashboard — its banner
+  // takes over from here.
   window.location.href = "dashboard.html";
 };
 

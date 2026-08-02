@@ -57,6 +57,18 @@
   .hint{color:var(--text2);font-size:12.5px;margin-top:10px;}
   .msg{font-size:13.5px;color:var(--text2);min-height:18px;margin:-8px 0 14px;}
   .msg.err{color:var(--urgent);}
+  .banner{background:#FDF1E4;border:1.5px solid var(--orange);border-radius:14px;padding:16px 18px;margin:0 0 20px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .banner .btxt{flex:1;min-width:220px;font-size:14.5px;color:#7A3C00;}
+  .banner .btxt b{color:#B85511;display:block;font-size:15px;margin-bottom:2px;}
+  .banner .btn{background:var(--orange);color:#fff;}
+  .steps{display:flex;gap:10px;margin:0 0 20px;flex-wrap:wrap;}
+  .stepchip{flex:1;min-width:150px;background:var(--card);border:1px solid var(--divider);border-radius:12px;
+    padding:10px 14px;font-size:13px;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:8px;}
+  .stepchip .dot{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--divider);display:inline-flex;
+    align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+  .stepchip.done{color:var(--text);}
+  .stepchip.done .dot{background:var(--yellow);border-color:var(--yellow);color:#111;}
   .gate{max-width:440px;margin:70px auto;background:var(--card);border:1px solid var(--divider);border-radius:18px;padding:28px;}
   .gate h2{font-size:20px;font-weight:900;margin-bottom:4px;}
   .gate .note{color:var(--text2);font-size:13.5px;margin-bottom:14px;}
@@ -96,6 +108,17 @@
   <h1 id="coName">—</h1>
   <div class="subline" id="coSub">—</div>
   <div class="msg" id="msg"></div>
+
+  <div class="banner hidden" id="cardBanner">
+    <div class="btxt"><b>Card needed — $0 today.</b>Your card wasn't saved at signup. Put it on file now so your crew never hits a payment wall — 30 days free, cancel anytime.</div>
+    <button class="btn" id="cardBtn">ADD CARD</button>
+  </div>
+
+  <div class="steps hidden" id="setupSteps">
+    <span class="stepchip" id="stepCard"><span class="dot">✓</span>Card on file</span>
+    <span class="stepchip" id="stepJobs"><span class="dot">✓</span>Add your jobs</span>
+    <span class="stepchip" id="stepCrew"><span class="dot">✓</span>Invite your crew</span>
+  </div>
 
   <div class="card">
     <h2>JOBS</h2>
@@ -165,7 +188,7 @@ function esc(s) { const d = document.createElement("div"); d.textContent = s ?? 
 
 function render() {
   const { company, members, projects } = roster;
-  $("billingBtn").textContent = company.stripe_subscription_id ? "MANAGE BILLING" : "START SUBSCRIPTION";
+  $("billingBtn").textContent = (company.stripe_subscription_id || company.card_saved_at) ? "MANAGE BILLING" : "ADD CARD";
   const trialExpired = company.status === "trialing" && company.trial_ends_at && new Date(company.trial_ends_at) < new Date();
   $("coName").innerHTML = esc(company.name) +
     (company.status === "trialing"
@@ -177,40 +200,56 @@ function render() {
   // free until a job sits on it. The server computes it — we just show it.
   const billable = roster.billable_seats ?? company.seat_count ?? 0;
   const adminBilled = billable > members.filter((m) => !m.is_admin).length;
+  const cardOn = !!company.card_saved_at;
   $("coSub").innerHTML = "<b>" + billable + "</b> billed seat" + (billable === 1 ? "" : "s") + " · $24.99 per seat / month" + (adminBilled ? "" : " · your seat is free until you take a job");
-  $("seatSummary").textContent = billable === 0 ? "Free — nothing to bill yet" : billable + " seat" + (billable === 1 ? "" : "s") + " · $" + (billable * 24.99).toFixed(2) + "/mo";
-  $("seatDetail").textContent = adminBilled ? "Includes your seat — a job is assigned to you." : "Teammates are billed; you're free until a job lands on your seat.";
-  if (!company.stripe_subscription_id) {
-    if (trialExpired) {
-      $("seatDetail").textContent = "Your 30 free days are up — new logging is paused until billing starts. Everything already logged stays readable. Tap Start subscription.";
-    } else if (billable > 0) {
-      $("seatDetail").textContent += " Add a card to keep the trial running — tap Start subscription.";
-    }
+  $("seatSummary").textContent = billable === 0 ? "Nothing billed yet" : billable + " seat" + (billable === 1 ? "" : "s") + " · $" + (billable * 24.99).toFixed(2) + "/mo";
+  if (!cardOn) {
+    $("seatDetail").textContent = "No card on file — add one with the button above.";
+  } else if (trialExpired && !company.stripe_subscription_id) {
+    $("seatDetail").textContent = "Your 30 free days are up — new logging is paused until billing starts. Everything already logged stays readable.";
+  } else if (billable === 0) {
+    $("seatDetail").textContent = "Card on file ✓ — you're free until you add a teammate or take a job yourself.";
+  } else {
+    $("seatDetail").textContent = (adminBilled ? "Includes your seat — a job is assigned to you. " : "Teammates are billed; you're free until a job lands on your seat. ")
+      + (company.status === "trialing" ? "Billing starts on your card when the free 30 days end." : "");
   }
+
+  // The wall you can see: no card on file = orange banner until it's fixed.
+  $("cardBanner").classList.toggle("hidden", cardOn);
+
+  // First-run checklist — card, jobs, crew. Hidden once all three are done.
+  const jobsDone = projects.length > 0;
+  const crewDone = members.length > 1;
+  const allDone = cardOn && jobsDone && crewDone;
+  $("setupSteps").classList.toggle("hidden", allDone);
+  const mark = (id, done, label) => { const el = $(id); el.className = "stepchip" + (done ? " done" : ""); el.querySelector(".dot").textContent = done ? "✓" : ""; };
+  mark("stepCard", cardOn); mark("stepJobs", jobsDone); mark("stepCrew", crewDone);
 
   const memberLabel = (m) => (m.is_admin ? "me" : m.email + (m.user_id ? "" : " (invited)"));
   const holderOf = (p) => members.find((m) => (p.pending_member_id ? m.id === p.pending_member_id : m.user_id === p.user_id));
+  // The who-runs-it dropdown is ALWAYS visible — even solo, you see the
+  // job is on your seat. That's the job↔person link, both directions.
   $("projects").innerHTML = projects.map((p) => {
-    if (members.length < 2) {
-      const holder = holderOf(p);
-      return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + '</span></div>' +
-        '<span style="color:var(--text2);font-size:12.5px;">' + esc(holder ? memberLabel(holder) : "unassigned") + "</span></div>";
-    }
     const holder = holderOf(p);
     const opts = members.map((m) => '<option value="' + m.id + '"' + (holder && holder.id === m.id ? " selected" : "") + ">" + esc(memberLabel(m)) + "</option>").join("");
     return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + '</span></div>' +
-      '<select data-project="' + p.id + '">' + opts + "</select></div>";
+      '<select data-project="' + p.id + '" title="Who runs this job">' + opts + "</select></div>";
   }).join("") || '<div class="row"><div class="who"><span>No jobs yet — add the first one below.</span></div></div>';
 
   const assign = $("pAssign");
   assign.innerHTML = members.map((m) => '<option value="' + m.id + '"' + (m.is_admin ? " selected" : "") + ">" + esc(memberLabel(m)) + "</option>").join("");
-  assign.style.display = members.length < 2 ? "none" : "";
 
+  // Each person's row lists the jobs on their seat — the other direction
+  // of the same link — plus whether that seat is billed.
+  const jobsFor = (m) => projects.filter((p) => (p.pending_member_id ? p.pending_member_id === m.id : p.user_id === m.user_id && m.user_id)).map((p) => p.project_name);
   $("members").innerHTML = members.map((m) => {
     const status = m.user_id ? '<span class="pill joined">ON THE JOB</span>' : '<span class="pill invited">INVITED</span>';
     const remove = !m.user_id ? ' <button class="ghost" data-remove="' + m.id + '">Remove</button>' : "";
+    const jobs = jobsFor(m);
+    const jobsTxt = jobs.length ? "runs: " + jobs.join(", ") : "no jobs yet";
+    const seatTxt = m.is_admin ? (jobs.length ? " · your seat is billed (has a job)" : " · your seat is free") : " · billed seat";
     const admin = m.is_admin ? " · admin" : "";
-    return '<div class="row"><div class="who"><b>' + esc(m.email) + "</b><span>" + (m.user_id ? "signed in" : "waiting for first sign-in") + admin + "</span></div><div>" + status + remove + "</div></div>";
+    return '<div class="row"><div class="who"><b>' + esc(m.email) + "</b><span>" + (m.user_id ? "signed in" : "waiting for first sign-in") + admin + " · " + esc(jobsTxt) + seatTxt + "</span></div><div>" + status + remove + "</div></div>";
   }).join("");
 
   document.querySelectorAll("select[data-project]").forEach((sel) => {
@@ -299,15 +338,26 @@ $("mInvite").onclick = async () => {
   $("mEmail").value = ""; say(out.emailed === false ? "Invited — heads up, we couldn't email them, so tell them to download SiteLog AI and sign in with that email." : "Invited — we emailed them a download link and sign-in steps."); refresh();
 };
 $("billingBtn").onclick = async () => {
-  const hasSub = roster && roster.company && roster.company.stripe_subscription_id;
-  const out = await call({ action: hasSub ? "portal" : "checkout" });
+  // Card on file (customer exists) → Stripe portal for card/invoices/cancel.
+  // No card yet → the $0 card-save page.
+  const c = roster && roster.company;
+  const action = c && (c.stripe_subscription_id || c.card_saved_at) ? "portal" : "setup_card";
+  const out = await call({ action });
   if (out.url) { window.location.href = out.url; return; }
   say(out.error || "Billing is unavailable right now.", true);
 };
+$("cardBtn").onclick = async () => {
+  $("cardBtn").disabled = true;
+  const out = await call({ action: "setup_card" });
+  if (out.url) { window.location.href = out.url; return; }
+  $("cardBtn").disabled = false;
+  say(out.error || "Couldn't open the card page — try again.", true);
+};
 $("signout").onclick = async () => { await sb.auth.signOut(); window.location.reload(); };
 
-if (new URLSearchParams(location.search).get("billing") === "success") {
-  setTimeout(() => say("Card added — your trial is running. You're all set."), 600);
+const q = new URLSearchParams(location.search);
+if (q.get("billing") === "success" || q.get("card") === "saved") {
+  setTimeout(() => say("Card saved — you're all set. Nothing is charged until your free 30 days end."), 600);
 }
 
 boot();
