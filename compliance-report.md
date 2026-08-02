@@ -26,7 +26,7 @@ Applied to index, teams, dashboard, start, faq, terms, privacy, 404, accessibili
   | Body/secondary/buttons/wordmark | 16.8 / 6.5 / 13.5 / 4.34(large) | unchanged ✓ |
 - **Images**: all `<img>` alt text reviewed this session; screenshots carry descriptive alts (e.g. the fire-main voice-note description).
 - **New page**: `accessibility.html` — WCAG 2.1 AA commitment + barrier-report channel (support@sitelog-ai.com, 5-business-day response target). Linked in every footer.
-- **Tooling caveat (honest)**: Lighthouse/axe were not runnable in this environment; the audit above is a manual WCAG checklist pass with computed contrast math. Recommend a one-time browser Lighthouse run (Chrome DevTools → Lighthouse → Accessibility) to confirm ≥95; remaining risk is low.
+- **Lighthouse accessibility scores — measured 2026-08-02** (headless Chrome, live site). First run: 91–100 (failures: brand orange/olive on tinted card backgrounds; one heading-order slip in the teams mockup). Fixed by computed-ratio color darkening (#B85511→#A34A0B, #6E7D00→#657200 — ≥4.5:1 on every background color in use) and h4→h3 in the mockup. **Final: 100/100 on all nine pages** (index, teams, dashboard, start, faq, terms, privacy, 404, accessibility).
 
 ## Task 2 — Tracking & script hygiene (CIPA)
 
