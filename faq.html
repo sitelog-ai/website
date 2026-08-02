@@ -26,7 +26,7 @@
 }
 </script>
 <style>
-:root { --paper:#FAF9F5; --card:#FFFFFF; --divider:#E7E4DC; --orange:#E87722; --ink:#17181C; --muted:#565B63; --accent:#C25A0E; --head:#B85511; }
+:root { --paper:#FAF9F5; --card:#FFFFFF; --divider:#E7E4DC; --orange:#E87722; --ink:#17181C; --muted:#565B63; --accent:#B85511; --head:#B85511; }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; line-height:1.65; }
 .wrap { max-width:760px; margin:0 auto; padding:48px 24px 80px; }
@@ -45,10 +45,14 @@ strong { color:var(--ink); }
 a { color:var(--accent); }
 footer { border-top:1px solid var(--divider); margin-top:56px; padding-top:24px; color:var(--muted); font-size:14px; }
 footer a { color:var(--muted); }
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #B85511;outline-offset:2px;}
+.skip{position:absolute;left:-9999px;top:0;background:#17181C;color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:100;font-weight:700;}
+.skip:focus{left:0;}
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to content</a>
+<main id="main"><div class="wrap">
   <div class="brand"><a href="/">SITELOG <span>AI</span></a></div>
   <h1>Frequently Asked Questions</h1>
   <p class="sub">Straight answers, the way you'd want them on a jobsite.</p>
@@ -88,6 +92,10 @@ footer a { color:var(--muted); }
   <h2>What happens to my logs if I drop my phone in a footer?</h2>
   <p>Synced logs live safely in the cloud, not just on the phone. Sign in on the new phone and everything is there. The only logs at risk are ones captured offline that haven't synced yet — which is why the app syncs the moment it sees coverage.</p>
 
+  <!-- ATTORNEY REVIEW -->
+  <h2>Do I need permission to record on the jobsite?</h2>
+  <p>Sometimes, yes — and it's on you to know when. SiteLog is designed for <strong>your own dictated logs</strong>: you talking into your own phone about your own work. That's what the mic button is for. But recording laws vary by state — <strong>some states, including Florida and California, require every party to a conversation to consent before it's recorded</strong>. If other people's voices could be captured in what you record, get their consent first, or step away and dictate your note solo. You are responsible for complying with the recording and privacy laws that apply where you work. When in doubt: say what you saw, not what someone else said.</p>
+
   <h2>What does it cost?</h2>
   <p>See <a href="/#pricing">current pricing on the home page</a>. One thing that will never change: your existing logs stay yours and stay readable — we will never hold your record hostage.</p>
 
@@ -115,6 +123,8 @@ footer a { color:var(--muted); }
     <p>Questions we didn't answer? <a href="mailto:support@sitelog-ai.com">support@sitelog-ai.com</a></p>
     <p style="margin-top:8px"><a href="/">Home</a> · <a href="/teams.html">Teams</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
   </footer>
+<footer style="border-top:1px solid #E7E4DC;margin-top:48px;padding-top:20px;font-size:13.5px;color:#565B63;"><a href="/" style="margin-right:16px;">Home</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="privacy.html" style="margin-right:16px;">Privacy Policy</a><a href="accessibility.html" style="margin-right:16px;">Accessibility</a><span>© 2026 Block Management Services LLC</span></footer>
 </div>
+</main>
 </body>
 </html>

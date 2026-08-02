@@ -475,7 +475,7 @@
   }
   .teams-card::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--orange);}
   .teams-card .plan{
-    color:var(--orange);font-weight:800;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;
+    color:#B85511;font-weight:800;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;
   }
   .teams-card h3{font-size:22px;font-weight:900;margin:10px 0 12px;letter-spacing:-.3px;}
   .teams-card p{color:var(--text2);font-size:15.5px;margin-bottom:12px;}
@@ -563,20 +563,20 @@
     color:var(--text);
   }
   .lightzone .eyebrow{color:#B85511;}
-  .lightzone .hl,.lightzone h1 .hl,.lightzone h2 .hl,.lightzone h3 .hl,.lightzone .mani-inner h2 .hl,.lightzone .mani-punch .hl{color:#C25A0E;}
+  .lightzone .hl,.lightzone h1 .hl,.lightzone h2 .hl,.lightzone h3 .hl,.lightzone .mani-inner h2 .hl,.lightzone .mani-punch .hl{color:#B85511;}
   .lightzone .f-kicker.yel{color:#8A5A0A;background:rgba(232,119,34,.12);}
   .lightzone .f-kicker.org{color:#B85511;background:rgba(232,119,34,.12);}
   .lightzone .f-list li::before{color:#E87722;}
-  .lightzone .steps-tag strong{color:#C25A0E;}
-  .lightzone .receipt .n{color:#C25A0E;}
-  .lightzone .price-card .plan,.lightzone .pcard .plan{color:#C25A0E;}
+  .lightzone .steps-tag strong{color:#B85511;}
+  .lightzone .receipt .n{color:#B85511;}
+  .lightzone .price-card .plan,.lightzone .pcard .plan{color:#B85511;}
   .lightzone .price-feats li::before{color:#5C8A2B;}
   .lightzone .price-card{border-color:#E87722;box-shadow:0 30px 80px rgba(232,119,34,.12);}
   .lightzone .why-card .ico{background:rgba(232,119,34,.12);color:#E87722;}
   .lightzone .manifesto{background:transparent;border-color:#E7E4DC;}
   .lightzone .phone{box-shadow:0 26px 55px rgba(20,22,28,.20),0 0 0 1px rgba(0,0,0,.10),0 0 0 9px #0B0C0D;}
   .lightzone .doc{box-shadow:0 26px 60px rgba(20,22,28,.18),0 0 0 1px rgba(0,0,0,.06);}
-  .lightzone .wordmark .ai{color:#C25A0E;}
+  .lightzone .wordmark .ai{color:#B85511;}
   /* smooth dark→light transition — no hard seam, no flat grey block */
 
 
@@ -595,9 +595,13 @@
   @media(prefers-reduced-motion:reduce){
     .reveal{opacity:1;transform:none;transition:none;}
   }
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #B85511;outline-offset:2px;}
+.skip{position:absolute;left:-9999px;top:0;background:#17181C;color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:100;font-weight:700;}
+.skip:focus{left:0;}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <nav>
   <div class="nav-inner">
@@ -625,6 +629,7 @@
     </details>
   </div>
 </nav>
+<main id="main">
 
 <div class="lightzone">
 <!-- ================= HERO ================= -->
@@ -638,7 +643,7 @@
         <a class="btn-primary" href="teams.html#signup">Start your team — 30 days free</a>
         <a class="btn-ghost" href="#how">See how it works</a>
       </div>
-      <p class="hero-note"><strong>$24.99 per seat / month.</strong> 30-day free trial · cancel anytime · admin seat free. Working solo? <a href="#pricing" style="color:#C25A0E;font-weight:700;">Get the app on the App Store ↓</a></p>
+      <p class="hero-note"><strong>$24.99 per seat / month.</strong> 30-day free trial · cancel anytime · admin seat free. Working solo? <a href="#pricing" style="color:#B85511;font-weight:700;">Get the app on the App Store ↓</a></p>
     </div>
     <div class="f-visual">
       <div class="phone">
@@ -1055,6 +1060,7 @@
   </div>
 </div>
 
+</main>
 <footer>
   <div class="foot-inner">
     <span class="wordmark" style="font-size:17px;">SITELOG <span class="ai">AI</span></span>
@@ -1066,6 +1072,8 @@
       <a href="start.html">Getting started</a>
       <a href="terms.html">Terms</a>
       <a href="privacy.html">Privacy Policy</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="dashboard.html">Manage billing / Cancel</a>
     </div>
     <span>© 2026 Block Management Services LLC</span>
   </div>
