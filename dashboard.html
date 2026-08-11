@@ -43,7 +43,9 @@
   .ghost:hover{border-color:var(--urgent);color:var(--urgent);}
   select{background:#F5F3EE;border:1px solid var(--divider);border-radius:10px;color:var(--text);
     font-size:13.5px;padding:8px 10px;max-width:190px;}
-  .addline{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .addline{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:flex-end;}
+  .assignwrap{display:flex;flex-direction:column;gap:3px;}
+  .runslabel{font-size:9.5px;font-weight:800;letter-spacing:1.2px;color:#A34A0B;}
   .addline input{flex:1;min-width:150px;background:#F5F3EE;border:1px solid var(--divider);border-radius:10px;
     color:var(--text);font-size:14.5px;padding:11px 12px;outline:none;}
   .addline input:focus{border-color:#E87722;}
@@ -127,12 +129,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 
   <div class="card">
     <h2>JOBS</h2>
+    <div class="hint" style="margin:-6px 0 12px;">Every job has <b>one super on it</b> — pick who when you add the job, and change it anytime with the dropdown on the job.</div>
     <div id="projects"></div>
     <div class="addline">
       <input id="pName" placeholder="Job name" aria-label="Job name">
       <input id="pAddr" placeholder="Address" aria-label="Job address">
       <input id="pEmail" placeholder="Report email (optional)" aria-label="Report email (optional)">
-      <select id="pAssign" title="Runs this job" aria-label="Who runs this job"></select>
+      <span class="assignwrap"><label class="runslabel" for="pAssign">RUNS THIS JOB</label><select id="pAssign" title="Runs this job"></select></span>
       <button class="btn" id="pAdd">ADD JOB</button>
     </div>
     <div class="hint">The job lands in that person's app automatically — nothing for them to set up. Reassigning later moves nothing; every log stays with the job.</div>
@@ -333,10 +336,18 @@ $("gVerify").onclick = async () => {
   boot();
 };
 $("pAdd").onclick = async () => {
-  const out = await call({ action: "add_project", project_name: $("pName").value, address: $("pAddr").value, report_email: $("pEmail").value, member_id: $("pAssign").style.display === "none" ? null : $("pAssign").value });
-  if (out.error) return say(out.error, true);
-  $("pName").value = ""; $("pAddr").value = ""; $("pEmail").value = "";
-  say("Job added."); refresh();
+  // Guard against double-submit: one click, one job. The DB also enforces
+  // uniqueness on active (company, name, address), so a duplicate that
+  // slips through any client comes back as an error, not a second job.
+  $("pAdd").disabled = true;
+  try {
+    const out = await call({ action: "add_project", project_name: $("pName").value, address: $("pAddr").value, report_email: $("pEmail").value, member_id: $("pAssign").style.display === "none" ? null : $("pAssign").value });
+    if (out.error) return say(/duplicate|unique/i.test(out.error) ? "That job is already on the board." : out.error, true);
+    $("pName").value = ""; $("pAddr").value = ""; $("pEmail").value = "";
+    say("Job added."); refresh();
+  } finally {
+    $("pAdd").disabled = false;
+  }
 };
 $("mInvite").onclick = async () => {
   const out = await call({ action: "invite", email: $("mEmail").value });
