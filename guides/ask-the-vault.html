@@ -98,6 +98,7 @@
   .step{display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:center;padding:34px 0;border-bottom:1px solid var(--divider);}
   .step.wide{grid-template-columns:1fr 400px;}
   .step.nophone{grid-template-columns:1fr;}
+  .step>*{min-width:0;}
   .step:last-of-type{border-bottom:none;}
   .stepno{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;
     background:var(--yellow);color:#111;font-weight:900;font-size:18px;margin-bottom:12px;}
@@ -109,6 +110,7 @@
   .why{color:var(--text2);font-size:14.5px;max-width:52ch;}
   .why strong{color:var(--text);}
   .shot img{width:100%;height:auto;max-width:280px;display:block;margin:0 auto;border-radius:22px;box-shadow:0 22px 50px rgba(20,22,28,.22);}
+  .shot img.panel{border-radius:14px;border:1px solid #2A2C33;box-shadow:0 14px 34px rgba(20,22,28,.16);}
 
   .xtra{padding:34px 0 8px;border-bottom:1px solid var(--divider);}
   .xtra h2{font-size:clamp(22px,3vw,30px);font-weight:900;letter-spacing:-.4px;margin-bottom:4px;}
@@ -144,6 +146,12 @@
   .foot-links{display:flex;gap:16px;flex-wrap:wrap;}
   .foot-inner a{color:var(--text2);text-decoration:none;}
 
+  @media(max-width:520px){
+    .tgrid{grid-template-columns:1fr;}
+    .pager{flex-direction:column;}
+    .pg.next{text-align:left;}
+    h1{font-size:30px;}
+  }
   @media(max-width:860px){
     .layout{grid-template-columns:1fr;gap:0;}
     aside{border-right:none;border-bottom:1px solid var(--divider);padding:16px 0 10px;}
@@ -202,7 +210,7 @@
         
         
       </div>
-      <div class="shot"><img src="img/ask-the-vault/phone-s3.png" alt="Typing a plain-English question into the SiteLog AI Vault" loading="lazy" style="max-width:min(420px,100%);" width="740" height="578"></div>
+      <div class="shot"><img src="img/ask-the-vault/phone-s3.png" alt="Typing a plain-English question into the SiteLog AI Vault" class="panel" loading="lazy" style="max-width:min(400px,100%);" width="740" height="578"></div>
     </div>
 <div class="step wide">
       <div>
@@ -212,7 +220,7 @@
         
         
       </div>
-      <div class="shot"><img src="img/ask-the-vault/phone-s4.png" alt="SiteLog AI Vault results — dated logs with photos returned for the question" loading="lazy" style="max-width:min(420px,100%);" width="740" height="812"></div>
+      <div class="shot"><img src="img/ask-the-vault/phone-s4.png" alt="SiteLog AI Vault results — dated logs with photos returned for the question" class="panel" loading="lazy" style="max-width:min(400px,100%);" width="740" height="812"></div>
     </div>
 <div class="step nophone">
       <div>
