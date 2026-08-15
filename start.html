@@ -63,6 +63,12 @@
   .phone-screen{border-radius:30px;overflow:hidden;aspect-ratio:381/828;}
   .phone-screen img{width:100%;height:100%;object-fit:cover;display:block;}
 
+  .stores{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .storebadge{display:flex;align-items:center;gap:9px;background:#0B0B0B;color:#fff;border-radius:12px;
+    padding:9px 16px 9px 13px;border:1px solid #2a2a2a;min-width:168px;}
+  .storebadge:hover{filter:brightness(1.18);}
+  .storebadge .bt small{display:block;font-size:9.5px;color:#cfcfcf;letter-spacing:.3px;font-weight:500;}
+  .storebadge .bt b{display:block;font-size:15px;font-weight:700;letter-spacing:-.2px;color:#fff;}
   .notebox{background:#F7F5EF;border:1px solid var(--divider);border-left:4px solid var(--orange);border-radius:12px;padding:16px 18px;margin:26px 0 6px;font-size:14.5px;color:#3A3D44;}
   .notebox strong{color:var(--text);}
 
@@ -126,8 +132,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
       <div class="step">
         <span class="n">1</span>
         <h3>Get the app</h3>
-        <p>Download <strong>SiteLog AI</strong> free from the Apple App Store. Your seat is already paid for by the company — <strong>you never enter a card.</strong></p>
-        <a class="storebtn" href="https://apps.apple.com/app/id6768819001">Get it on the App Store →</a>
+        <p>Download <strong>SiteLog AI</strong> free — <strong>iPhone or Android</strong>. Your seat is already paid for by the company — <strong>you never enter a card.</strong></p>
+        <div class="stores"><a class="storebadge" href="https://apps.apple.com/us/app/sitelog-ai/id6768819001"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M17.05 12.54c-.03-2.5 2.04-3.7 2.13-3.76-1.16-1.7-2.97-1.93-3.61-1.96-1.54-.16-3 .9-3.78.9-.78 0-1.98-.88-3.26-.86-1.68.03-3.22.97-4.08 2.47-1.74 3.02-.44 7.49 1.25 9.94.83 1.2 1.82 2.55 3.12 2.5 1.25-.05 1.72-.81 3.23-.81 1.51 0 1.93.81 3.25.78 1.34-.02 2.19-1.22 3.01-2.43.95-1.39 1.34-2.74 1.36-2.81-.03-.01-2.6-1-2.62-3.96zM14.56 4.5c.69-.83 1.15-1.99 1.02-3.15-.99.04-2.18.66-2.89 1.49-.63.73-1.19 1.91-1.04 3.04 1.1.09 2.23-.56 2.91-1.38z"/></svg><span class="bt"><small>Download on the</small><b>App Store</b></span></a><a class="storebadge" href="https://play.google.com/store/apps/details?id=com.sitelogai.app"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#34A853" d="M4 2.5v19l10-9.5z"/><path fill="#FBBC04" d="M14 12l4.5-4.3 2.6 1.5c1.2.7 1.2 2 0 2.7l-2.6 1.5z"/><path fill="#EA4335" d="M4 21.5c.3.3.9.4 1.4.1L18.5 14 14 12z"/><path fill="#4285F4" d="M5.4 2.4C4.9 2.1 4.3 2.2 4 2.5L14 12l4.5-4.3z"/></svg><span class="bt"><small>Get it on</small><b>Google Play</b></span></a></div>
       </div>
       <div class="step">
         <span class="n">2</span>
@@ -181,7 +187,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
       </div>
       <div class="arow">
         <span class="tag">INVITE CREW</span>
-        <p>Enter a work email and tap <strong>INVITE</strong>. We email them the App Store link and sign-in steps — you don't explain anything. <strong>Each teammate you add is a $24.99/mo seat</strong> (prorated automatically); your own seat is free until you put a job on it.</p>
+        <p>Enter a work email and tap <strong>INVITE</strong>. We email them the download links and sign-in steps — you don't explain anything. <strong>Each teammate you add is a $24.99/mo seat</strong> (prorated automatically); your own seat is free until you put a job on it.</p>
       </div>
       <div class="arow">
         <span class="tag">REASSIGN</span>
@@ -218,7 +224,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
       </details>
       <details>
         <summary>I'm solo — no team, no admin.</summary>
-        <div class="a">Grab the individual plan straight from the <a href="https://apps.apple.com/app/id6768819001">App Store</a> — 14-day free trial, $29.99/mo, billed by Apple. Same app, your own record.</div>
+        <div class="a">Grab the individual plan straight from the <a href="https://apps.apple.com/us/app/sitelog-ai/id6768819001">App Store</a> or <a href="https://play.google.com/store/apps/details?id=com.sitelogai.app">Google Play</a> — 14-day free trial, $29.99/mo, billed by your app store. Same app, your own record.</div>
       </details>
     </div>
   </div>
@@ -226,7 +232,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 
 <div class="final">
   <div class="wrap">
-    <a class="storebtn" href="https://apps.apple.com/app/id6768819001">Get SiteLog AI on the App Store →</a>
+    <div class="stores" style="justify-content:center;"><a class="storebadge" href="https://apps.apple.com/us/app/sitelog-ai/id6768819001"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M17.05 12.54c-.03-2.5 2.04-3.7 2.13-3.76-1.16-1.7-2.97-1.93-3.61-1.96-1.54-.16-3 .9-3.78.9-.78 0-1.98-.88-3.26-.86-1.68.03-3.22.97-4.08 2.47-1.74 3.02-.44 7.49 1.25 9.94.83 1.2 1.82 2.55 3.12 2.5 1.25-.05 1.72-.81 3.23-.81 1.51 0 1.93.81 3.25.78 1.34-.02 2.19-1.22 3.01-2.43.95-1.39 1.34-2.74 1.36-2.81-.03-.01-2.6-1-2.62-3.96zM14.56 4.5c.69-.83 1.15-1.99 1.02-3.15-.99.04-2.18.66-2.89 1.49-.63.73-1.19 1.91-1.04 3.04 1.1.09 2.23-.56 2.91-1.38z"/></svg><span class="bt"><small>Download on the</small><b>App Store</b></span></a><a class="storebadge" href="https://play.google.com/store/apps/details?id=com.sitelogai.app"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#34A853" d="M4 2.5v19l10-9.5z"/><path fill="#FBBC04" d="M14 12l4.5-4.3 2.6 1.5c1.2.7 1.2 2 0 2.7l-2.6 1.5z"/><path fill="#EA4335" d="M4 21.5c.3.3.9.4 1.4.1L18.5 14 14 12z"/><path fill="#4285F4" d="M5.4 2.4C4.9 2.1 4.3 2.2 4 2.5L14 12l4.5-4.3z"/></svg><span class="bt"><small>Get it on</small><b>Google Play</b></span></a></div>
     <p>Stuck on anything? <a class="mail" href="mailto:support@sitelog-ai.com">support@sitelog-ai.com</a> — a person reads it.</p>
   </div>
 </div>
