@@ -38,6 +38,15 @@
   .pill{font-size:11px;font-weight:800;letter-spacing:1px;border-radius:999px;padding:4px 11px;white-space:nowrap;}
   .pill.joined{border:1.5px solid var(--record);color:#6FA36F;}
   .pill.invited{border:1.5px solid var(--task,#E8A020);color:#E8A020;}
+  .pill.vacant{border:1.5px solid var(--orange);color:var(--orange);}
+  .rowbtns{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+  details.archbox{margin-top:16px;border-top:1px solid var(--divider);padding-top:4px;}
+  details.archbox summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:1px;color:var(--text2);padding:10px 0;list-style:none;}
+  details.archbox summary::before{content:"▸ ";}
+  details.archbox[open] summary::before{content:"▾ ";}
+  .editline{display:flex;gap:8px;flex-wrap:wrap;flex:1;}
+  .editline input{flex:1;min-width:120px;background:#F5F3EE;border:1px solid var(--divider);border-radius:10px;color:var(--text);font-size:13.5px;padding:8px 10px;outline:none;}
+  .editline input:focus{border-color:#E87722;}
   .ghost{background:none;border:1.5px solid var(--divider);color:var(--text2);border-radius:10px;
     font-size:12.5px;font-weight:700;padding:7px 12px;cursor:pointer;}
   .ghost:hover{border-color:var(--urgent);color:var(--urgent);}
@@ -138,7 +147,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
       <span class="assignwrap"><label class="runslabel" for="pAssign">RUNS THIS JOB</label><select id="pAssign" title="Runs this job"></select></span>
       <button class="btn" id="pAdd">ADD JOB</button>
     </div>
-    <div class="hint">The job lands in that person's app automatically — nothing for them to set up. Reassigning later moves nothing; every log stays with the job.</div>
+    <div class="hint">The job lands in that person's app automatically — nothing for them to set up. Reassigning later moves nothing; every log stays with the job. When a job wraps, hit Archive — every record stays and you can restore it anytime.</div>
+    <details class="archbox hidden" id="archBox">
+      <summary id="archSummary">ARCHIVED JOBS</summary>
+      <div id="archived"></div>
+    </details>
   </div>
 
   <div class="card">
@@ -171,6 +184,7 @@ const $ = (id) => document.getElementById(id);
 const gMsg = (t, e) => { $("gMsg").textContent = t; $("gMsg").className = "msg" + (e ? " err" : ""); };
 const say = (t, e) => { $("msg").textContent = t; $("msg").className = "msg" + (e ? " err" : ""); if (t && !e) setTimeout(() => { if ($("msg").textContent === t) say(""); }, 4000); };
 let roster = null;
+let editingJob = null; // project id currently in inline-edit mode
 
 // One network shape, made bulletproof: a hard 15s timeout so a hanging
 // request can never spin forever, plus one automatic retry (cold starts).
@@ -235,34 +249,67 @@ function render() {
   mark("stepCard", cardOn); mark("stepJobs", jobsDone); mark("stepCrew", crewDone);
 
   const memberLabel = (m) => (m.is_admin ? "me" : m.email + (m.user_id ? "" : " (invited)"));
-  const holderOf = (p) => members.find((m) => (p.pending_member_id ? m.id === p.pending_member_id : m.user_id === p.user_id));
+  const holderOf = (p) => members.find((m) => (p.pending_member_id ? m.id === p.pending_member_id : m.user_id === p.user_id && m.user_id));
+  const activeJobs = projects.filter((p) => p.is_active);
+  const archivedJobs = projects.filter((p) => !p.is_active);
+
   // The who-runs-it dropdown is ALWAYS visible — even solo, you see the
   // job is on your seat. That's the job↔person link, both directions.
-  $("projects").innerHTML = projects.map((p) => {
+  // A vacant job (its super was removed) says so and waits for a pick.
+  $("projects").innerHTML = activeJobs.map((p) => {
+    if (editingJob === p.id) {
+      return '<div class="row"><div class="editline">' +
+        '<input id="eName" value="' + esc(p.project_name) + '" aria-label="Job name">' +
+        '<input id="eAddr" value="' + esc(p.address) + '" aria-label="Job address">' +
+        '<input id="eEmail" value="' + esc(p.report_email || "") + '" placeholder="Report email (optional)" aria-label="Report email">' +
+        '</div><div class="rowbtns">' +
+        '<button class="btn" data-esave="' + p.id + '" style="padding:8px 14px;">SAVE</button>' +
+        '<button class="ghost" data-ecancel="1">Cancel</button></div></div>';
+    }
     const holder = holderOf(p);
-    const opts = members.map((m) => '<option value="' + m.id + '"' + (holder && holder.id === m.id ? " selected" : "") + ">" + esc(memberLabel(m)) + "</option>").join("");
+    const vacant = !holder;
+    const opts = (vacant ? '<option value="" disabled selected>— assign a super —</option>' : "") +
+      members.map((m) => '<option value="' + m.id + '"' + (holder && holder.id === m.id ? " selected" : "") + ">" + esc(memberLabel(m)) + "</option>").join("");
     return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + '</span></div>' +
-      '<select data-project="' + p.id + '" title="Who runs this job">' + opts + "</select></div>";
+      '<div class="rowbtns">' + (vacant ? '<span class="pill vacant">NEEDS A SUPER</span>' : "") +
+      '<select data-project="' + p.id + '" title="Who runs this job">' + opts + "</select>" +
+      '<button class="ghost" data-edit="' + p.id + '" title="Edit job">Edit</button>' +
+      '<button class="ghost" data-archive="' + p.id + '" data-jobname="' + esc(p.project_name) + '" title="Archive job">Archive</button>' +
+      "</div></div>";
   }).join("") || '<div class="row"><div class="who"><span>No jobs yet — add the first one below.</span></div></div>';
+
+  // Archived jobs: tucked in a dropdown, restorable in one click.
+  $("archBox").classList.toggle("hidden", archivedJobs.length === 0);
+  $("archSummary").textContent = "ARCHIVED JOBS (" + archivedJobs.length + ")";
+  $("archived").innerHTML = archivedJobs.map((p) => {
+    const when = p.archived_at ? " · archived " + new Date(p.archived_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "";
+    return '<div class="row"><div class="who"><b>' + esc(p.project_name) + "</b><span>" + esc(p.address) + esc(when) + '</span></div>' +
+      '<div class="rowbtns"><button class="ghost" data-restore="' + p.id + '" data-jobname="' + esc(p.project_name) + '">Restore</button></div></div>';
+  }).join("");
 
   const assign = $("pAssign");
   assign.innerHTML = members.map((m) => '<option value="' + m.id + '"' + (m.is_admin ? " selected" : "") + ">" + esc(memberLabel(m)) + "</option>").join("");
 
   // Each person's row lists the jobs on their seat — the other direction
   // of the same link — plus whether that seat is billed.
-  const jobsFor = (m) => projects.filter((p) => (p.pending_member_id ? p.pending_member_id === m.id : p.user_id === m.user_id && m.user_id)).map((p) => p.project_name);
+  const jobsFor = (m) => activeJobs.filter((p) => (p.pending_member_id ? p.pending_member_id === m.id : p.user_id === m.user_id && m.user_id)).map((p) => p.project_name);
   $("members").innerHTML = members.map((m) => {
     const status = m.user_id ? '<span class="pill joined">ON THE JOB</span>' : '<span class="pill invited">INVITED</span>';
-    const remove = !m.user_id ? ' <button class="ghost" data-remove="' + m.id + '">Remove</button>' : "";
+    // Pending invites get a plain remove; joined members get the real one —
+    // records stay with the company, their jobs go vacant for reassignment.
+    const remove = m.is_admin ? "" : (!m.user_id
+      ? ' <button class="ghost" data-remove="' + m.id + '">Remove</button>'
+      : ' <button class="ghost" data-removeseat="' + m.id + '" data-email="' + esc(m.email) + '">Remove</button>');
     const jobs = jobsFor(m);
     const jobsTxt = jobs.length ? "runs: " + jobs.join(", ") : "no jobs yet";
     const seatTxt = m.is_admin ? (jobs.length ? " · your seat is billed (has a job)" : " · your seat is free") : " · billed seat";
     const admin = m.is_admin ? " · admin" : "";
-    return '<div class="row"><div class="who"><b>' + esc(m.email) + "</b><span>" + (m.user_id ? "signed in" : "waiting for first sign-in") + admin + " · " + esc(jobsTxt) + seatTxt + "</span></div><div>" + status + remove + "</div></div>";
+    return '<div class="row"><div class="who"><b>' + esc(m.email) + "</b><span>" + (m.user_id ? "signed in" : "waiting for first sign-in") + admin + " · " + esc(jobsTxt) + seatTxt + "</span></div><div class=\"rowbtns\">" + status + remove + "</div></div>";
   }).join("");
 
   document.querySelectorAll("select[data-project]").forEach((sel) => {
     sel.onchange = async () => {
+      if (!sel.value) return;
       const out = await call({ action: "reassign", project_id: sel.dataset.project, member_id: sel.value });
       say(out.error || "Job reassigned — the record stayed put.", !!out.error);
       refresh();
@@ -270,6 +317,51 @@ function render() {
   });
   document.querySelectorAll("[data-remove]").forEach((b) => {
     b.onclick = async () => { const out = await call({ action: "remove_invite", member_id: b.dataset.remove }); say(out.error || "Invite removed.", !!out.error); refresh(); };
+  });
+  document.querySelectorAll("[data-removeseat]").forEach((b) => {
+    b.onclick = async () => {
+      const email = b.dataset.email;
+      const ok = window.confirm("Remove " + email + " from the team?\n\n• Their login is deleted and the seat stops billing.\n• Every log, photo, and report they made stays with the company.\n• Their jobs go vacant for you to reassign.\n\nThis cannot be undone.");
+      if (!ok) return;
+      b.disabled = true;
+      const out = await call({ action: "remove_member", member_id: b.dataset.removeseat, confirm: "REMOVE" });
+      say(out.error || (email + " removed — their records stayed with the company. Reassign their jobs below."), !!out.error);
+      refresh();
+    };
+  });
+  document.querySelectorAll("[data-edit]").forEach((b) => {
+    b.onclick = () => { editingJob = b.dataset.edit; render(); };
+  });
+  document.querySelectorAll("[data-ecancel]").forEach((b) => {
+    b.onclick = () => { editingJob = null; render(); };
+  });
+  document.querySelectorAll("[data-esave]").forEach((b) => {
+    b.onclick = async () => {
+      b.disabled = true;
+      const out = await call({ action: "edit_project", project_id: b.dataset.esave, project_name: $("eName").value, address: $("eAddr").value, report_email: $("eEmail").value });
+      if (out.error) { b.disabled = false; return say(out.error, true); }
+      editingJob = null;
+      say("Job updated.");
+      refresh();
+    };
+  });
+  document.querySelectorAll("[data-archive]").forEach((b) => {
+    b.onclick = async () => {
+      const ok = window.confirm('Archive "' + b.dataset.jobname + '"?\n\nIt comes off every phone and stops taking new logs. Every record stays with the company, and you can restore it here anytime.');
+      if (!ok) return;
+      b.disabled = true;
+      const out = await call({ action: "archive_project", project_id: b.dataset.archive });
+      say(out.error || ('"' + b.dataset.jobname + '" archived — find it under Archived jobs.'), !!out.error);
+      refresh();
+    };
+  });
+  document.querySelectorAll("[data-restore]").forEach((b) => {
+    b.onclick = async () => {
+      b.disabled = true;
+      const out = await call({ action: "restore_project", project_id: b.dataset.restore });
+      say(out.error || ('"' + b.dataset.jobname + '" is back on the board — assign who runs it.'), !!out.error);
+      refresh();
+    };
   });
 }
 
